@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>La cession Dailly · Exposé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
+<style>
+/* Design System : .claude/skills/slides-design/ds.html, copie locale dans ds.html */
+:root{
+  --encre:#0a0a0a; --fond:#f5f5f5; --carte:#fff; --filet:#e4e4e2;
+  --bleu:#1d9bf0; --vert:#008000; --rouge:#ff0000;
+  --sourdine:rgba(10,10,10,.55); --tenu:rgba(10,10,10,.38);
+  --fs-titre:clamp(1.9rem,3.9vw,3.3rem);
+  --fs-chiffre:clamp(22px,2.34vw,2.1rem);
+  --fs-md:clamp(14px,1.09vw,1.05rem);
+  --fs-sm:clamp(11px,.94vw,.84rem);
+  --sans:"Plus Jakarta Sans",system-ui,sans-serif;
+  --r:20px; --rail:6vh;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--sans);font-size:var(--fs-md);font-weight:400;line-height:1.5;
+  color:var(--encre);background:var(--fond);scroll-snap-type:y mandatory;overflow-x:hidden}
+
+/* rail de sommaire */
+.rail{position:fixed;left:0;top:0;bottom:0;width:var(--rail);background:var(--carte);
+  border-right:1px solid var(--filet);display:flex;flex-direction:column;align-items:center;
+  padding:1.4vh 0;gap:.6vh;z-index:50}
+.rail .liens{flex:1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;padding:.8vh 0}
+.rail .liens a{width:3.6vh;height:3.6vh;display:grid;place-items:center;border-radius:1.1vh;background:var(--fond);border:1px solid var(--filet);
+  font-size:var(--fs-sm);font-weight:600;color:var(--sourdine);text-decoration:none;transition:.18s}
+.rail .liens a:hover{background:#e9e9e6;color:var(--encre)}
+.rail .liens a.on{color:#fff;background:var(--encre);border-color:var(--encre)}
+.rail .bar{width:.8vh;height:9vh;background:var(--filet);border-radius:2px;overflow:hidden}
+.rail .bar i{display:block;width:100%;background:var(--bleu);height:0}
+
+section{height:100vh;height:100svh;scroll-snap-align:start;scroll-snap-stop:always;
+  padding:10vh 2.6vw 6.5vh calc(var(--rail) + 2.6vw);display:flex;flex-direction:column;
+  justify-content:center;border-top:1px solid var(--filet);position:relative;overflow:hidden}
+section:first-of-type{border-top:0}
+.num{position:absolute;bottom:2.6vh;right:2.6vw;font-size:var(--fs-sm);font-weight:600;letter-spacing:.16em;color:var(--tenu);z-index:3}
+h1,h2{font-size:var(--fs-titre);font-weight:600;letter-spacing:-.035em;line-height:1.04;margin:0 0 .6em;position:relative;
+  transform:translate(var(--t-dx,0),var(--t-dy,0))}
+strong{font-weight:600}
+.pied{position:absolute;bottom:2.6vh;left:calc(var(--rail) + 2.6vw);right:10vw;font-size:var(--fs-sm);
+  font-weight:300;color:var(--tenu);z-index:3;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pied .ia{height:1.1em;vertical-align:-.18em;margin:0 .25em 0 .1em}
+.lg-i{position:absolute;top:2.9vh;right:2.6vw;height:3vh;width:auto;z-index:6;display:block}
+
+/* S1 couverture */
+#s1{color:#fff;align-items:center;text-align:center;padding-left:calc(var(--rail) + 2.6vw);
+  background:linear-gradient(rgba(10,10,10,.62),rgba(10,10,10,.72)),url(../img/cover.jpg) center 40%/cover no-repeat}
+#s1 .lg-i{background:rgba(255,255,255,.92);backdrop-filter:blur(6px);border-radius:8px;padding:.5vh .8vh;height:4vh}
+#s1 h1{font-size:clamp(2.6rem,6vw,5.2rem);margin:0 0 .35em}
+#s1 .court{font-size:var(--fs-chiffre);font-weight:400;max-width:26em;margin:0 0 0;color:rgba(255,255,255,.88);line-height:1.3}
+#s1 .signature{position:absolute;left:0;right:0;bottom:7vh;display:flex;flex-direction:column;gap:.5vh;align-items:center;padding-left:var(--rail)}
+#s1 .ress{color:var(--bleu);font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:var(--fs-sm)}
+#s1 .auteurs{color:rgba(255,255,255,.7);font-size:var(--fs-sm)}
+#s1 .num{color:rgba(255,255,255,.7)}
+#s1 .num,#s1 .signature{z-index:3}
+
+/* S2 trou de trésorerie : gros chiffre plein + frise */
+.s2g{display:grid;grid-template-columns:30% 1fr;gap:2.4vw;align-items:stretch;height:36vh}
+.bloc{background:var(--encre);color:#fff;border-radius:var(--r);padding:2.4vh 2vw;display:flex;flex-direction:column;justify-content:space-between}
+.bloc .grand{font-size:clamp(3rem,6.2vw,5.4rem);font-weight:500;letter-spacing:-.05em;line-height:1}
+.bloc .leg{font-size:var(--fs-md);color:rgba(255,255,255,.78)}
+.frise{background:var(--carte);border:1px solid var(--filet);border-radius:var(--r);padding:2vh 2vw;display:flex;flex-direction:column;justify-content:center;gap:2.6vh}
+.frise .rangee{display:grid;grid-template-columns:31% 1fr;gap:1.4vw;align-items:center}
+.frise .qui{font-size:var(--fs-chiffre);font-weight:500;letter-spacing:-.02em}
+.frise .piste{position:relative;height:6.2vh;border-radius:999px;background:var(--fond)}
+.frise .piste i{position:absolute;top:0;bottom:0;border-radius:999px;display:flex;align-items:center;padding:0 1.4vw;color:#fff;font-weight:600;font-size:var(--fs-md);font-style:normal;white-space:nowrap}
+.frise .jalons{display:flex;justify-content:space-between;color:var(--sourdine);font-size:var(--fs-md);font-weight:600;padding-left:calc(31% + 1.4vw)}
+
+/* S3 avant / après */
+.s3g{display:grid;grid-template-columns:1fr 6vw 1fr;align-items:stretch;height:50vh}
+.av,.ap{border-radius:var(--r);padding:4vh 2.4vw;display:flex;flex-direction:column;justify-content:space-between}
+.av{background:var(--carte);border:3px solid var(--rouge)}
+.ap{background:var(--vert);color:#fff}
+.av small,.ap small{font-size:var(--fs-md);font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.av small{color:var(--rouge)} .ap small{color:rgba(255,255,255,.85)}
+.av .mot,.ap .mot{font-size:clamp(2rem,4vw,3.6rem);font-weight:600;letter-spacing:-.04em;line-height:1.05}
+.av .mots,.ap .mots{display:flex;gap:.6vw;flex-wrap:wrap}
+.av .mots span{border:1px solid var(--rouge);color:var(--rouge);border-radius:999px;padding:.25em 1em;font-weight:600;font-size:var(--fs-md)}
+.ap .mots span{background:#fff;color:var(--vert);border-radius:999px;padding:.25em 1em;font-weight:600;font-size:var(--fs-md)}
+.fl{display:grid;place-items:center;font-size:3.4vw;color:var(--tenu)}
+
+/* S4 une loi, un code */
+.s4g{display:grid;grid-template-columns:34% 1fr;gap:3vw;align-items:center}
+.s4g .an{font-size:clamp(4rem,10.5vw,9rem);font-weight:500;letter-spacing:-.06em;line-height:.9;color:var(--bleu)}
+.s4g .an small{display:block;font-size:var(--fs-chiffre);font-weight:500;letter-spacing:-.01em;color:var(--sourdine);margin-top:1.4vh}
+.liste{counter-reset:n;display:flex;flex-direction:column;gap:1.5vh}
+.liste div{counter-increment:n;display:grid;grid-template-columns:5vh 1fr;gap:1.4vw;align-items:center;border-top:1px solid var(--filet);padding-top:1.4vh}
+.liste div::before{content:counter(n);font-size:var(--fs-chiffre);font-weight:500;color:var(--bleu)}
+.liste b{display:block;font-size:var(--fs-chiffre);font-weight:500;letter-spacing:-.02em;line-height:1.15}
+.liste span{color:var(--sourdine)}
+
+/* S5 trois acteurs */
+.s5g{position:relative;height:56vh}
+.s5g svg{width:100%;height:100%;display:block}
+.nd{fill:#fff;stroke:#0a0a0a;stroke-width:2}
+.nd.b{fill:var(--bleu);stroke:var(--bleu)} .nd.n{fill:var(--encre)}
+.tn{font-family:var(--sans);font-size:26px;font-weight:600;fill:#fff} .tn.s{fill:#0a0a0a}
+.tm{font-family:var(--sans);font-size:20px;font-weight:400;fill:rgba(10,10,10,.6)}
+.tf{font-family:var(--sans);font-size:21px;font-weight:600;fill:#0a0a0a}
+
+/* S6 trois conditions */
+.s6g{display:grid;grid-template-rows:repeat(3,1fr);gap:2vh;height:54vh}
+.cd{display:grid;grid-template-columns:8vh 1fr;gap:1.6vw;align-items:center;border-radius:var(--r);padding:0 2vw}
+.cd:nth-child(1){background:var(--encre);color:#fff}
+.cd:nth-child(2){background:var(--carte);border:1px solid var(--encre)}
+.cd:nth-child(3){background:var(--bleu);color:#fff}
+.cd .n{font-size:clamp(2.2rem,4.4vw,4rem);font-weight:500;letter-spacing:-.05em}
+.cd .t{font-size:clamp(1.5rem,2.9vw,2.6rem);font-weight:600;letter-spacing:-.03em;line-height:1.1}
+.cd .t small{display:block;font-size:var(--fs-md);font-weight:400;opacity:.75;letter-spacing:0;margin-top:.5vh}
+
+
+/* pictogrammes (schémas) */
+.ic{width:7vh;height:7vh;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;flex:none;display:block}
+.ics{fill:none;stroke:currentColor;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.frise .qui{display:flex;align-items:center;gap:.9vw}
+.frise .qui .ic{width:5.4vh;height:5.4vh;color:var(--encre)}
+.frise .jalons span{display:flex;align-items:center;gap:.6vw}
+.frise .jalons .ic{width:5vh;height:5vh;color:var(--encre)}
+.av .tete,.ap .tete{display:flex;justify-content:space-between;align-items:flex-start}
+.av .ic.g,.ap .ic.g{width:10vh;height:10vh}
+.av .ic.g{color:var(--rouge)} .ap .ic.g{color:#fff}
+.liste div{grid-template-columns:7.4vh 1fr}
+.liste div::before{content:none}
+.liste .ic{width:6.4vh;height:6.4vh;color:var(--bleu)}
+.cd{grid-template-columns:8vh 1fr 10vh}
+.cd .ic{width:9vh;height:9vh;justify-self:end}
+.cd:nth-child(1) .ic,.cd:nth-child(3) .ic{color:#fff} .cd:nth-child(2) .ic{color:var(--encre)}
+
+
+/* chiffres clés (widgets) */
+.chiffres{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6vw;margin-top:2.2vh}
+.kc{display:grid;grid-template-columns:8.4vh 1fr;gap:1.2vw;align-items:center;border-radius:var(--r);padding:1.6vh 1.6vw;background:var(--carte);border:1px solid var(--filet)}
+.kc svg{width:8.4vh;height:8.4vh;display:block}
+.kc b{display:block;font-size:clamp(1.7rem,2.9vw,2.7rem);font-weight:500;letter-spacing:-.04em;line-height:1}
+.kc span{display:block;font-size:var(--fs-md);color:var(--sourdine);line-height:1.25;margin-top:.5vh}
+.kc.n{background:var(--encre);color:#fff;border-color:var(--encre)} .kc.n span{color:rgba(255,255,255,.75)}
+.kc.v{background:var(--vert);color:#fff;border-color:var(--vert)} .kc.v span{color:rgba(255,255,255,.85)}
+
+
+.ico{width:7vh;height:7vh;display:block;flex:none}
+.pastille{display:grid;place-items:center;background:#fff;border-radius:16px;width:11vh;height:11vh;flex:none}
+.pastille .ico,.pastille .ic{width:8vh;height:8vh}
+.pastille.r{border:2px solid var(--rouge)} .pastille.r .ic{color:var(--rouge)}
+.av .tete,.ap .tete{align-items:flex-start}
+.cd .pastille{justify-self:end;width:10vh;height:10vh} .cd .pastille .ico{width:7.4vh;height:7.4vh}
+.cd:nth-child(2) .pastille{background:var(--fond);border:1px solid var(--filet)}
+.liste .ico{width:6.4vh;height:6.4vh}
+
+
+/* frise chronologique (S4) */
+.tl{position:relative;display:grid;grid-template-columns:repeat(5,1fr);margin-top:4vh;padding-top:3.4vh}
+.tl::before{content:"";position:absolute;left:2%;right:2%;top:1.1vh;height:.6vh;border-radius:3px;background:var(--filet)}
+.tl .jal{position:relative;display:flex;flex-direction:column;gap:.3vh;align-items:flex-start;padding-right:1vw}
+.tl .jal i{position:absolute;left:0;top:-3.1vh;width:2.2vh;height:2.2vh;border-radius:50%;background:var(--bleu);border:.5vh solid var(--fond)}
+.tl .jal:first-child i{background:var(--encre)} .tl .jal:last-child i{background:var(--vert)}
+.tl .jal b{font-size:clamp(1.5rem,2.5vw,2.3rem);font-weight:500;letter-spacing:-.04em;line-height:1}
+.tl .jal span{font-size:var(--fs-md);color:var(--sourdine);line-height:1.25}
+.tl .jal:last-child b{color:var(--vert)}
+
+
+/* exposé complet : parties 3 et 4 et page d'axes d'amélioration */
+.s7g{display:grid;grid-template-columns:30% 1fr;gap:2.4vw;height:46vh}
+.pile3{display:grid;grid-template-rows:repeat(3,1fr);gap:1.6vh}
+.pile3 .kc{height:100%}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:2vw;height:52vh}
+.ck{border-radius:var(--r);padding:3.4vh 2.2vw;display:flex;flex-direction:column;gap:2.4vh;background:var(--carte);border:1px solid var(--filet)}
+.ck .tete{display:flex;justify-content:space-between;align-items:flex-start;gap:1vw}
+.ck h3{margin:0;font-size:clamp(1.5rem,2.9vw,2.6rem);font-weight:600;letter-spacing:-.035em;line-height:1.05}
+.ck small{font-size:var(--fs-md);font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+.ck .mots{display:flex;flex-wrap:wrap;gap:.7vw;margin-top:auto}
+.ck .mots span{border:1px solid currentColor;border-radius:999px;padding:.3em 1em;font-weight:600;font-size:var(--fs-md)}
+.ck.v{background:var(--vert);color:#fff;border-color:var(--vert)} .ck.v .mots span{background:#fff;color:var(--vert);border-color:#fff}
+.ck.n{background:var(--encre);color:#fff;border-color:var(--encre)} .ck.n .mots span{background:#fff;color:var(--encre);border-color:#fff}
+.ck.b{background:var(--bleu);color:#fff;border-color:var(--bleu)} .ck.b .mots span{background:#fff;color:var(--bleu);border-color:#fff}
+.ck.r{border:3px solid var(--rouge)} .ck.r small,.ck.r .gros{color:var(--rouge)}
+.ck .gros{font-size:clamp(2.6rem,5.2vw,4.6rem);font-weight:500;letter-spacing:-.05em;line-height:1}
+.ck p{margin:0;font-size:var(--fs-md);line-height:1.35}
+.ck .pastille{width:10vh;height:10vh} .ck .pastille .ico{width:7.4vh;height:7.4vh}
+.alerte{display:flex;align-items:center;gap:1.2vw;border:3px solid var(--rouge);border-radius:var(--r);padding:1.4vh 1.6vw;margin-top:2.4vh;font-size:var(--fs-chiffre);font-weight:600;letter-spacing:-.02em;color:var(--rouge);background:var(--carte)}
+.alerte .ico{width:6vh;height:6vh;flex:none}
+.s12g{display:grid;grid-template-columns:1fr 36%;gap:2.4vw;height:50vh;align-items:stretch}
+.s12g .liste{justify-content:center}
+.s16g{display:grid;grid-template-rows:repeat(2,1fr);gap:2vh;height:54vh}
+.s16g .cd:nth-child(1){background:var(--bleu);color:#fff} .s16g .cd:nth-child(2){background:var(--encre);color:#fff}
+.s16g .cd .pastille{background:#fff}
+.s16g .cd{grid-template-columns:11vh 1fr 15vw}
+.s16g .cd .n{font-size:clamp(1.2rem,2vw,1.8rem);text-align:right;line-height:1.1}
+.am{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2vw}
+.am .p{border-radius:var(--r);background:var(--carte);border:1px solid var(--filet);padding:1.6vh 1.2vw;display:flex;flex-direction:column;gap:1vh}
+.am .p h3{margin:0;font-size:var(--fs-chiffre);font-weight:600;letter-spacing:-.03em;line-height:1.05}
+.am .p h3 small{display:block;font-size:var(--fs-sm);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--bleu);margin-top:.3vh}
+.am .p b{font-size:var(--fs-sm);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--sourdine)}
+.am .p p{margin:0;font-size:var(--fs-md);line-height:1.3}
+.am .p.n{background:var(--encre);color:#fff;border-color:var(--encre)} .am .p.n b{color:rgba(255,255,255,.6)} .am .p.n h3 small{color:#7cc4f7}
+.groupe{margin-top:1.4vh;border-radius:var(--r);background:var(--bleu);color:#fff;padding:1.4vh 1.6vw;font-size:var(--fs-md);line-height:1.35}
+.groupe b{font-weight:600}
+@media print{.ck,.groupe,.am .p.n,.s16g .cd{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+/* notes orateur, touche N */
+.notes{display:none;position:fixed;left:var(--rail);right:0;bottom:0;background:var(--encre);
+  color:#fff;padding:1.6vh 4vw;font-size:var(--fs-sm);line-height:1.55;max-height:34vh;overflow:auto;z-index:40;
+  cursor:text;outline:0;white-space:pre-line}
+body.notesvues section.ici .notes{display:block}
+.notes:focus{box-shadow:inset 0 3px 0 var(--bleu)}
+.notes::after{content:attr(data-aide);display:block;margin-top:.7em;font-size:11px;color:rgba(255,255,255,.45);user-select:none}
+.toast{position:fixed;left:50%;bottom:3vh;transform:translateX(-50%);background:var(--bleu);color:#fff;border-radius:999px;padding:.5em 1.2em;font-size:13px;font-weight:600;z-index:95;opacity:0;transition:opacity .25s;pointer-events:none}
+.toast.on{opacity:1}
+
+@media (prefers-reduced-motion:no-preference){
+  #s5 .flux{stroke-dasharray:10 9;animation:s5flux 6s linear infinite}
+  @keyframes s5flux{to{stroke-dashoffset:-76}}
+}
+@media print{
+  @page{size:1280px 720px;margin:0}
+  :root{--rail:0px}
+  .notes,.rail,.toast{display:none!important}
+  html,body{scroll-snap-type:none}
+  section{break-inside:avoid;page-break-after:always}
+  section:last-of-type{page-break-after:auto}
+  #s5 .flux{animation:none}
+  #s1{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .bloc,.ap,.cd,.s4g .an,.liste div::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .frise .piste i,.ap .mots span{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-immeuble" viewBox="0 0 64 64"><rect x="14" y="8" width="36" height="48" rx="3"/><path d="M22 18h6M36 18h6M22 28h6M36 28h6M22 38h6M36 38h6M28 56V46h8v10"/></symbol>
+<symbol id="i-banque" viewBox="0 0 64 64"><path d="M8 26L32 10l24 16z"/><path d="M14 31v19M26 31v19M38 31v19M50 31v19M8 55h48"/></symbol>
+<symbol id="i-personne" viewBox="0 0 64 64"><circle cx="32" cy="20" r="10"/><path d="M12 56c0-12 9-20 20-20s20 8 20 20"/></symbol>
+<symbol id="i-facture" viewBox="0 0 64 64"><path d="M16 6h26l10 10v42H16z"/><path d="M42 6v10h10M24 28h20M24 36h20M24 44h10"/></symbol>
+<symbol id="i-euro" viewBox="0 0 64 64"><circle cx="32" cy="32" r="23"/><path d="M43 24c-3-4-8-5-12-3-5 2-7 8-5 13 2 5 8 8 13 6 2-1 3-2 4-3M20 29h19M20 35h19"/></symbol>
+<symbol id="i-huissier" viewBox="0 0 64 64"><path d="M12 6h28l8 8v30H12z"/><path d="M20 20h20M20 28h20"/><circle cx="44" cy="46" r="10"/><path d="M38 54l-4 9 8-3 4 4 2-9"/></symbol>
+<symbol id="i-bordereau" viewBox="0 0 64 64"><path d="M14 6h36v52H14z"/><path d="M22 18l4 4 7-8M22 32l4 4 7-8M22 46l4 4 7-8M39 20h7M39 34h7M39 48h7"/></symbol>
+<symbol id="i-balance" viewBox="0 0 64 64"><path d="M32 8v44M18 57h28M10 18h44"/><path d="M10 18L2 36h16zM54 18l-8 18h16z"/></symbol>
+<symbol id="i-livre" viewBox="0 0 64 64"><path d="M6 12h22c4 0 6 2 6 6v38c0-3-2-5-6-5H6z"/><path d="M58 12H36c-4 0-6 2-6 6v38c0-3 2-5 6-5h22z"/></symbol>
+<symbol id="i-loupe" viewBox="0 0 64 64"><circle cx="27" cy="27" r="17"/><path d="M40 40l17 17"/></symbol>
+<symbol id="c-calendrier" viewBox="0 0 64 64"><rect x="6" y="12" width="52" height="46" rx="8" fill="#fff" stroke="#0a0a0a" stroke-width="3"/><path d="M6 28h52V20a8 8 0 0 0-8-8H14a8 8 0 0 0-8 8z" fill="var(--rouge)"/><rect x="18" y="5" width="5" height="14" rx="2.5" fill="#0a0a0a"/><rect x="41" y="5" width="5" height="14" rx="2.5" fill="#0a0a0a"/><g fill="var(--bleu)"><rect x="14" y="35" width="8" height="7" rx="2"/><rect x="28" y="35" width="8" height="7" rx="2"/><rect x="42" y="35" width="8" height="7" rx="2"/><rect x="14" y="46" width="8" height="7" rx="2"/><rect x="28" y="46" width="8" height="7" rx="2"/></g></symbol>
+<symbol id="c-billets" viewBox="0 0 64 64"><rect x="4" y="30" width="48" height="26" rx="5" fill="#008000" opacity=".55"/><rect x="10" y="22" width="48" height="26" rx="5" fill="#008000"/><circle cx="34" cy="35" r="8" fill="#fff"/><path d="M37 31.5c-1.4-1.6-4-2-5.8-.9-2 1.2-2.8 3.9-1.5 5.8 1.3 1.9 4 2.6 6 1.3M28.5 34h7M28.5 36.5h7" fill="none" stroke="#008000" stroke-width="1.8" stroke-linecap="round"/><circle cx="16" cy="28" r="2" fill="#fff"/><circle cx="52" cy="42" r="2" fill="#fff"/></symbol>
+<symbol id="c-horloge" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="#fff" stroke="#0a0a0a" stroke-width="3.5"/><circle cx="32" cy="32" r="26" fill="none" stroke="var(--rouge)" stroke-width="3.5" stroke-dasharray="40 200" transform="rotate(-90 32 32)"/><path d="M32 16v17l11 7" fill="none" stroke="#0a0a0a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="32" r="3" fill="#0a0a0a"/></symbol>
+<symbol id="c-immeuble" viewBox="0 0 64 64"><rect x="12" y="6" width="40" height="52" rx="4" fill="var(--bleu)"/><g fill="#fff"><rect x="19" y="14" width="8" height="8" rx="1.5"/><rect x="37" y="14" width="8" height="8" rx="1.5"/><rect x="19" y="28" width="8" height="8" rx="1.5"/><rect x="37" y="28" width="8" height="8" rx="1.5"/></g><rect x="26" y="43" width="12" height="15" rx="2" fill="#0a0a0a"/></symbol>
+<symbol id="c-banque" viewBox="0 0 64 64"><path d="M4 24L32 6l28 18z" fill="#0a0a0a"/><g fill="var(--bleu)"><rect x="9" y="28" width="9" height="22" rx="1.5"/><rect x="22" y="28" width="9" height="22" rx="1.5"/><rect x="35" y="28" width="9" height="22" rx="1.5"/><rect x="48" y="28" width="9" height="22" rx="1.5"/></g><rect x="4" y="53" width="56" height="6" rx="2" fill="#0a0a0a"/><circle cx="32" cy="18" r="3.5" fill="#fff"/></symbol>
+<symbol id="c-facture" viewBox="0 0 64 64"><path d="M14 4h28l12 12v44H14z" fill="#fff" stroke="#0a0a0a" stroke-width="3" stroke-linejoin="round"/><path d="M42 4v12h12" fill="#e9e9e6" stroke="#0a0a0a" stroke-width="3" stroke-linejoin="round"/><g fill="var(--bleu)"><rect x="21" y="24" width="24" height="4" rx="2"/><rect x="21" y="33" width="24" height="4" rx="2"/><rect x="21" y="42" width="12" height="4" rx="2"/></g><circle cx="46" cy="50" r="10" fill="var(--bleu)"/><path d="M50 46.5c-1.5-1.7-4.3-2.2-6.3-1-2.1 1.3-3 4.1-1.6 6.1 1.4 2 4.3 2.7 6.4 1.4M40.5 49.5h8M40.5 52.5h8" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="c-pile" viewBox="0 0 64 64"><g stroke="#0a0a0a" stroke-width="2.6" stroke-linejoin="round"><path d="M22 4h26l10 10v38H22z" fill="#fff"/><path d="M16 10h26l10 10v38H16z" fill="#fff"/><path d="M10 16h26l10 10v38H10z" fill="#fff"/></g><g fill="var(--vert)"><rect x="17" y="34" width="22" height="4" rx="2"/><rect x="17" y="43" width="22" height="4" rx="2"/></g><path d="M16 26l4 4 7-8" fill="none" stroke="var(--vert)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="c-personne" viewBox="0 0 64 64"><circle cx="32" cy="19" r="11" fill="#0a0a0a"/><path d="M10 60c0-14 10-23 22-23s22 9 22 23z" fill="var(--bleu)"/></symbol>
+<symbol id="c-bouclier" viewBox="0 0 64 64"><path d="M32 4l22 8v18c0 14-9 26-22 30C19 56 10 44 10 30V12z" fill="var(--vert)"/><path d="M22 32l8 8 14-16" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="c-alerte" viewBox="0 0 64 64"><path d="M32 6L60 56H4z" fill="var(--rouge)" stroke="var(--rouge)" stroke-width="4" stroke-linejoin="round"/><rect x="29" y="22" width="6" height="20" rx="3" fill="#fff"/><circle cx="32" cy="48" r="3.5" fill="#fff"/></symbol>
+<symbol id="c-signature" viewBox="0 0 64 64"><path d="M14 4h28l10 10v46H14z" fill="#fff" stroke="#0a0a0a" stroke-width="3" stroke-linejoin="round"/><rect x="21" y="18" width="22" height="4" rx="2" fill="#0a0a0a"/><rect x="21" y="27" width="22" height="4" rx="2" fill="#0a0a0a" opacity=".4"/><path d="M20 49c4-9 8-9 10-4s5 4 12-5" fill="none" stroke="var(--bleu)" stroke-width="3.4" stroke-linecap="round"/></symbol>
+<symbol id="c-chaine" viewBox="0 0 64 64"><circle cx="22" cy="32" r="14" fill="none" stroke="#0a0a0a" stroke-width="6"/><circle cx="42" cy="32" r="14" fill="none" stroke="var(--rouge)" stroke-width="6"/></symbol>
+<symbol id="c-pieces" viewBox="0 0 64 64"><circle cx="24" cy="38" r="18" fill="var(--bleu)"/><circle cx="40" cy="26" r="18" fill="#0a0a0a"/><path d="M40 16v20M33 22h14M33 30h14" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/></symbol>
+</defs></svg>
+
+<nav class="rail" aria-label="Sommaire">
+  <div class="liens">
+    <a href="#s1">1</a><a href="#s2">2</a><a href="#s3">3</a><a href="#s4">4</a><a href="#s5">5</a><a href="#s6">6</a><a href="#s7">7</a><a href="#s8">8</a><a href="#s9">9</a><a href="#s10">10</a><a href="#s11">11</a><a href="#s12">12</a><a href="#s13">13</a><a href="#s14">14</a><a href="#s15">15</a><a href="#s16">16</a><a href="#s17">17</a><a href="#s18">18</a>
+  </div>
+  <div class="bar"><i></i></div>
+</nav>
+
+<!-- S1 couverture (structure du deck X : logo IUT, titre centré, texte court, signature) -->
+<section id="s1">
+  <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
+  <h1>La cession Dailly</h1>
+  <p class="court">Transformer ses factures en trésorerie sans attendre le paiement du client</p>
+  <div class="signature">
+    <div class="ress">R5.04 Droit des activités commerciales 2 · Mme Thouement</div>
+    <div class="auteurs">Lia Pletinckx-Ferry, Nafissa Mbaye, Romane Da Silva &amp; Sofian Chtioui · BUT3 MDEE · IUT de Roubaix · 2026</div>
+  </div>
+  <div class="num">1 / 18</div>
+  <div class="notes">Bonjour à tous. Aujourd'hui, nous allons vous présenter la cession Dailly, un outil qu'une entreprise utilise pour obtenir de l'argent tout de suite sur ses factures, sans attendre que son client la paie.
+
+Notre exposé suit quatre temps. D'abord pourquoi ce mécanisme existe et qui est concerné. Ensuite comment on le met en place, avec le bordereau. Puis ses effets juridiques, pour l'entreprise, la banque et le client. Et pour finir, ses avantages et ses limites.
+
+Pour ma part, je commence par le pourquoi et les acteurs.</div>
+</section>
+
+<!-- S2 : le trou de trésorerie (réf. : bloc plein encre + frise, rangée de blocs du DS) -->
+<section id="s2">
+  <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
+  <h2>Le trou de trésorerie</h2>
+  <div class="s2g">
+    <div class="bloc"><div class="grand">60 jours</div><div class="leg">Délai de paiement maximal entre professionnels</div></div>
+    <div class="frise">
+      <div class="rangee"><div class="qui"><svg class="ic"><use href="#i-immeuble"/></svg>L'entreprise</div><div class="piste"><i style="left:0;width:100%;background:var(--rouge)">Salaires et fournisseurs à payer</i></div></div>
+      <div class="rangee"><div class="qui"><svg class="ic"><use href="#i-personne"/></svg>Le client</div><div class="piste"><i style="left:0;width:100%;background:var(--encre)">Paie la facture à la fin du délai</i></div></div>
+      <div class="jalons"><span><svg class="ic"><use href="#i-facture"/></svg>Livraison et facture</span><span>Paiement<svg class="ic"><use href="#i-euro"/></svg></span></div>
+    </div>
+  </div>
+  <div class="chiffres">
+    <div class="kc"><svg><use href="#c-calendrier"/></svg><div><b>45 jours</b><span>fin de mois, si le contrat le prévoit</span></div></div>
+    <div class="kc n"><svg><use href="#c-billets"/></svg><div><b>13 Md€</b><span>de trésorerie en plus pour les PME sans retards de paiement</span></div></div>
+    <div class="kc v"><svg><use href="#c-horloge"/></svg><div><b>13,4 jours</b><span>de retard de paiement en France, fin 2025</span></div></div>
+  </div>
+  <p class="pied">Sources : Code de commerce, art. L. 441-10 ; Lamy ; Banque de France, Observatoire des délais de paiement, 24/09/2026, (consulté le 15/10/2026)</p>
+  <div class="num">2 / 18</div>
+  <div class="notes">Commençons par un problème très concret. Une entreprise livre un client professionnel et lui envoie sa facture. Mais elle ne sera pas payée tout de suite : le Code de commerce plafonne le délai à soixante jours après l'émission de la facture, ou quarante-cinq jours fin de mois si le contrat le prévoit.
+
+Pendant ce temps, elle doit déjà payer ses salaires, ses fournisseurs, ses charges. C'est ce qu'on appelle un trou de trésorerie : l'argent est bien dû, mais il n'est pas encore dans les caisses.
+
+Les chiffres de l'Observatoire des délais de paiement, publiés par la Banque de France en septembre 2026, montrent l'ampleur du phénomène : sans retards de paiement, les PME et les microentreprises auraient disposé de 13 milliards d'euros de trésorerie supplémentaire, et le retard moyen de paiement en France s'établissait à 13,4 jours fin 2025.
+
+La question, c'est donc : comment récupérer cet argent plus tôt ? Pour y répondre, regardons comment le droit s'y prenait avant 1981.</div>
+</section>
+
+<!-- S3 : avant / depuis (réf. : deux grands blocs face à face, rouge contre vert) -->
+<section id="s3">
+  <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
+  <h2>De l'huissier au bordereau</h2>
+  <div class="s3g">
+    <div class="av"><div class="tete"><small>Avant 1981</small><span class="pastille r"><svg class="ic g"><use href="#i-huissier"/></svg></span></div><div class="mot">Signification par huissier</div><div class="mots"><span>Lourd</span><span>Coûteux</span></div></div>
+    <div class="fl">→</div>
+    <div class="ap"><div class="tete"><small>Loi Dailly</small><span class="pastille"><svg class="ico"><use href="#c-pile"/></svg></span></div><div class="mot">Un simple bordereau</div><div class="mots"><span>Rapide</span><span>Simple</span></div></div>
+  </div>
+  <p class="pied">Sources : Code civil, ancien art. 1690 ; Banque de France, fiche 421 ; Dalloz ; Lamy, (consulté le 15/10/2026)</p>
+  <div class="num">3 / 18</div>
+  <div class="notes">Avant 1981, une entreprise qui voulait céder une créance à sa banque devait suivre une règle du Code civil, l'article 1690. Concrètement, la cession devait être signifiée au client par un huissier de justice, aujourd'hui appelé commissaire de justice, ou acceptée par lui dans un acte authentique, pour être opposable aux tiers. Cet article est resté dans le Code civil jusqu'en 2016. Pour une entreprise qui a des dizaines de factures, c'était lourd et cher.
+
+Le législateur a donc voulu un mode simplifié, adapté aux crédits des entreprises : plus besoin d'huissier, la cession se fait avec un seul document qui regroupe les factures, le bordereau.
+
+Voyons maintenant cette loi.</div>
+</section>
+
+<!-- S4 : une loi, un code (réf. : gros chiffre bleu à gauche, liste numérotée à droite) -->
+<section id="s4">
+  <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
+  <h2>Une loi, un code</h2>
+  <div class="s4g">
+    <div class="an">1981<small>2 janvier</small></div>
+    <div class="liste">
+      <div><svg class="ic"><use href="#i-balance"/></svg><p style="margin:0"><b>Loi Dailly</b><span>Loi n° 81-1, du nom du sénateur Étienne Dailly</span></p></div>
+      <div><svg class="ico"><use href="#c-facture"/></svg><p style="margin:0"><b>Cession de créances professionnelles</b><span>Par la seule remise d'un bordereau</span></p></div>
+      <div><svg class="ic"><use href="#i-livre"/></svg><p style="margin:0"><b>Code monétaire et financier</b><span>Articles L. 313-23 à L. 313-35</span></p></div>
+    </div>
+  </div>
+  <div class="tl">
+    <div class="jal"><i></i><b>1981</b><span>Loi Dailly</span></div>
+    <div class="jal"><i></i><b>1984</b><span>Loi bancaire, qui la modifie</span></div>
+    <div class="jal"><i></i><b>2001</b><span>Code monétaire et financier</span></div>
+    <div class="jal"><i></i><b>2016</b><span>Fin de la signification dans le Code civil</span></div>
+    <div class="jal"><i></i><b>2025</b><span>Bordereau électronique</span></div>
+  </div>
+  <p class="pied">Sources : Légifrance ; Sénat ; Banque de France, fiche 421 ; Dalloz ; Lamy droit du financement, (consulté le 15/10/2026)</p>
+  <div class="num">4 / 18</div>
+  <div class="notes">Cette loi, c'est la loi du 2 janvier 1981 « facilitant le crédit aux entreprises », que l'on appelle la loi Dailly, du nom d'Étienne Dailly, le sénateur de Seine-et-Marne qui a déposé le texte au Sénat en avril 1980. Elle permet de céder des créances professionnelles à une banque par la seule remise d'un bordereau, c'est-à-dire un document qui liste les factures cédées.
+
+Le texte a vécu depuis. Il a été modifié par la loi bancaire du 24 janvier 1984. Il est entré dans le Code monétaire et financier, aux articles L. 313-23 et suivants, avec la codification qui date du 1er janvier 2001. En 2016, la réforme du droit des contrats a supprimé l'ancien article 1690 du Code civil : la signification par huissier a donc disparu du droit commun aussi. Et depuis le décret du 12 août 2025, le bordereau peut être électronique, à condition d'être stipulé à ordre.
+
+Mes camarades détailleront ce bordereau et ses effets. Avant cela, il faut bien comprendre qui intervient.</div>
+</section>
+
+<!-- S5 : trois acteurs (réf. : schéma triangulaire, une couleur par rôle) -->
+<section id="s5">
+  <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
+  <h2>Trois acteurs</h2>
+  <div class="s5g">
+    <svg viewBox="0 0 1200 520" role="img" aria-label="Le cédant, le cessionnaire et le débiteur cédé">
+      <!-- flux : créance (cédant vers cessionnaire), crédit (cessionnaire vers cédant), paiement (débiteur vers cessionnaire) -->
+      <path class="flux" d="M 372 120 L 806 120" fill="none" stroke="#0a0a0a" stroke-width="3"/><polygon points="806,107 830,120 806,133" fill="#0a0a0a"/>
+      <path class="flux" d="M 828 190 L 394 190" fill="none" stroke="#1d9bf0" stroke-width="3"/><polygon points="394,177 370,190 394,203" fill="#1d9bf0"/>
+      <path class="flux" d="M 740 330 L 885 258" fill="none" stroke="#008000" stroke-width="3"/><polygon points="905,248 890,268 880,248" fill="#008000"/>
+      <rect class="nd b" x="40" y="70" width="330" height="170" rx="20"/>
+      <circle cx="100" cy="155" r="44" fill="#fff"/><use href="#c-immeuble" x="68" y="123" width="64" height="64"/>
+      <text class="tn" x="240" y="140" text-anchor="middle">Le cédant</text>
+      <text class="tn" x="240" y="180" text-anchor="middle" style="font-weight:400;font-size:22px">L'entreprise</text>
+      <rect class="nd n" x="830" y="70" width="330" height="170" rx="20"/>
+      <circle cx="888" cy="155" r="40" fill="#fff"/><use href="#c-banque" x="859" y="126" width="58" height="58"/>
+      <text class="tn" x="1048" y="140" text-anchor="middle">Le cessionnaire</text>
+      <text class="tn" x="1048" y="180" text-anchor="middle" style="font-weight:400;font-size:22px">La banque</text>
+      <rect class="nd" x="435" y="330" width="330" height="170" rx="20" style="stroke:#008000;stroke-width:4"/>
+      <circle cx="490" cy="415" r="40" fill="#f5f5f5" stroke="#008000" stroke-width="2"/><use href="#c-personne" x="461" y="386" width="58" height="58"/>
+      <text class="tn s" x="652" y="400" text-anchor="middle">Le débiteur cédé</text>
+      <text class="tn s" x="652" y="440" text-anchor="middle" style="font-weight:400;font-size:22px">Le client</text>
+      <text class="tf" x="600" y="104" text-anchor="middle">Créance</text>
+      <text class="tf" x="600" y="226" text-anchor="middle" style="fill:#1d9bf0">Crédit</text>
+      <text class="tf" x="862" y="352" text-anchor="start" style="fill:#008000">Paiement</text>
+    </svg>
+  </div>
+  <p class="pied">Sources : Banque de France, fiche 421 ; Légifrance, art. L. 313-23 ; Dalloz, (consulté le 15/10/2026)</p>
+  <div class="num">5 / 18</div>
+  <div class="notes">Pour comprendre le mécanisme, il faut connaître les trois acteurs.
+
+Le cédant, c'est l'entreprise qui cède sa facture : elle veut de l'argent tout de suite. Le cessionnaire, c'est celui qui reçoit la créance : en pratique une banque, la loi vise aussi les sociétés de financement. Et le débiteur cédé, c'est le client, celui qui doit payer la facture.
+
+Quand on parle de créance, c'est simplement le droit de se faire payer cette facture. L'entreprise cède ce droit à la banque, la banque lui accorde un crédit, et c'est ensuite le client qui règle la facture. À qui paie-t-il, et à partir de quand ? Ce sera le sujet de la partie sur les effets.</div>
+</section>
+
+<!-- S6 : trois conditions (réf. : trois bandeaux pleins, encre, bordé, bleu) -->
+<section id="s6">
+  <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
+  <h2>Trois conditions</h2>
+  <div class="s6g">
+    <div class="cd"><span class="n">1</span><span class="t">Un crédit<small>Par un établissement de crédit, une société de financement ou un FIA</small></span><span class="pastille"><svg class="ico"><use href="#c-banque"/></svg></span></div>
+    <div class="cd"><span class="n">2</span><span class="t">Une créance professionnelle<small>Entre professionnels</small></span><span class="pastille"><svg class="ico"><use href="#c-facture"/></svg></span></div>
+    <div class="cd"><span class="n">3</span><span class="t">Une créance liquide et exigible<small>Même à terme, ou future</small></span><span class="pastille"><svg class="ico"><use href="#c-calendrier"/></svg></span></div>
+  </div>
+  <p class="pied">Sources : Légifrance, art. L. 313-23 ; Dalloz ; Lamy, (consulté le 15/10/2026). Textes recherchés avec <img class="ia" src="../assets/logo-claude.svg" alt="Claude"> Claude.</p>
+  <div class="num">6 / 18</div>
+  <div class="notes">Pour que la cession Dailly s'applique, il faut réunir trois conditions, qui sont à l'article L. 313-23.
+
+Un : un crédit, accordé par un établissement de crédit, une société de financement ou un fonds d'investissement alternatif, ce qu'on appelle un FIA. La cession sert de moyen d'obtenir ce crédit ou de le garantir.
+
+Deux : une créance professionnelle, c'est-à-dire née de l'activité d'une entreprise ou d'un professionnel.
+
+Trois : une créance liquide et exigible, c'est-à-dire d'un montant déterminé et due, même si elle n'est payable qu'à terme. La loi ajoute que peuvent aussi être cédées des créances futures, nées d'un acte déjà conclu ou à venir, dont le montant et l'exigibilité ne sont pas encore déterminés.
+
+Quand ces conditions sont réunies, on peut passer à la formalité : le bordereau. Je laisse la parole à ma camarade pour cette partie.</div>
+</section>
+
+<section id="s7">
+  <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
+  <h2>Un exemple fil rouge</h2>
+  <div class="s7g">
+    <div class="bloc"><div class="grand" style="font-size:clamp(2.2rem,4vw,3.5rem);white-space:nowrap">10 000 €</div><div class="leg">Facture de Dupont, entreprise de peinture, due dans 60 jours</div></div>
+    <div class="pile3">
+      <div class="kc"><svg><use href="#c-immeuble"/></svg><div><b>Dupont</b><span>Le cédant : l'entreprise qui veut son argent</span></div></div>
+      <div class="kc n"><svg><use href="#c-banque"/></svg><div><b>La banque</b><span>Le cessionnaire : elle reçoit la créance</span></div></div>
+      <div class="kc v"><svg><use href="#c-personne"/></svg><div><b>Martin</b><span>Le débiteur cédé : le client qui doit les 10 000 €</span></div></div>
+    </div>
+  </div>
+  <p class="pied">Source : Légifrance, Code monétaire et financier, art. L. 313-23 et suivants, (consulté le 21/10/2026)</p>
+  <div class="num">7 / 18</div>
+  <div class="notes">Je vais maintenant vous présenter les effets juridiques de la cession Dailly, et surtout ce qui arrive au client, que l'on appelle le débiteur cédé.
+
+Pour que ce soit concret, on garde un exemple tout au long de ma partie. L'entreprise Dupont, spécialisée dans les travaux de peinture, cède à sa banque une facture de dix mille euros. Cette facture est due dans soixante jours par son client, la société Martin.
+
+Dupont est donc le cédant, la banque est le cessionnaire, et Martin est le débiteur cédé.
+
+Je vais vous montrer trois choses : comment la créance passe à la banque, ce qui se passe pour Martin selon ce qu'on lui a dit, et enfin la garantie que Dupont doit à la banque.</div>
+</section>
+
+<section id="s8">
+  <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
+  <h2>La date du bordereau fixe le transfert</h2>
+  <div class="s4g">
+    <div class="an" style="font-size:clamp(3rem,6.4vw,5.6rem);white-space:nowrap">L. 313-27<small>Code monétaire et financier</small></div>
+    <div class="liste">
+      <div><svg class="ico"><use href="#c-signature"/></svg><p style="margin:0"><b>Effet entre les parties</b><span>Dupont et la banque sont liés dès la remise</span></p></div>
+      <div><svg class="ic"><use href="#i-balance"/></svg><p style="margin:0"><b>Opposable aux tiers</b><span>Les autres créanciers doivent en tenir compte</span></p></div>
+      <div><svg class="ico"><use href="#c-calendrier"/></svg><p style="margin:0"><b>La date inscrite sur le bordereau</b><span>Apposée par la banque ; le jour du paiement de la facture n'a aucune importance</span></p></div>
+    </div>
+  </div>
+  <div class="alerte"><svg class="ico"><use href="#c-alerte"/></svg>Un bordereau sans date ne produit aucun effet</div>
+  <p class="pied">Sources : Légifrance, Code monétaire et financier, art. L. 313-25 et L. 313-27, (consulté le 21/10/2026)</p>
+  <div class="num">8 / 18</div>
+  <div class="notes">Première question : à quel moment la créance passe-t-elle à la banque ? La réponse est dans l'article L. 313-27 du Code monétaire et financier.
+
+La cession prend effet entre les parties, et elle devient opposable aux tiers, à la date apposée sur le bordereau lors de sa remise. Opposable aux tiers, cela veut dire que tout le monde doit en tenir compte, par exemple les autres créanciers de l'entreprise.
+
+Le jour où la facture sera payée n'a aucune importance : ce qui compte, c'est la date inscrite sur le bordereau. Cette date est apposée par la banque, qui est le cessionnaire, d'après l'article L. 313-25.
+
+Et c'est pour cela que la date est une mention essentielle. Un bordereau qui n'est pas daté ne produit aucun effet, ni entre Dupont et la banque, ni à l'égard des tiers.</div>
+</section>
+
+<section id="s9">
+  <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
+  <h2>Protégée de la faillite du cédant</h2>
+  <div class="s3g" style="grid-template-columns:1fr 9vw 1fr">
+    <div class="ap"><div class="tete"><small>Protection</small><span class="pastille"><svg class="ico"><use href="#c-bouclier"/></svg></span></div><div class="mot">La cession reste efficace</div><div class="mots"><span>Sortie du patrimoine</span><span>Pas de saisie</span><span>Sûretés transférées</span></div></div>
+    <div class="fl" style="font-size:var(--fs-md);font-weight:600">mais</div>
+    <div class="av"><div class="tete"><small>Limites</small><span class="pastille r"><svg class="ico"><use href="#c-alerte"/></svg></span></div><div class="mot">Deux exceptions</div><div class="mots"><span>Période suspecte : 18 mois</span><span>Cession en garantie</span></div></div>
+  </div>
+  <p class="pied">Sources : CMF, art. L. 313-27 ; Cass. com., 07/12/2004, n° 02-20.732 ; C. com., art. L. 631-8, (consulté le 21/10/2026)</p>
+  <div class="num">9 / 18</div>
+  <div class="notes">Deuxième effet : la protection contre les autres créanciers. Imaginons que Dupont soit placée en redressement ou en liquidation judiciaire après la remise du bordereau. La cession reste efficace. La loi de sécurité financière du premier août deux mille trois a inscrit dans la loi que la cession est opposable quelle que soit la date de naissance, d'échéance ou d'exigibilité des créances, et la Cour de cassation en a tiré que la créance sort du patrimoine du cédant à la date du bordereau.
+
+La créance est sortie du patrimoine de Dupont. Ses autres créanciers ne peuvent donc pas la saisir, et les sûretés qui l'accompagnent passent à la banque.
+
+Mais cette protection a deux limites. D'abord, la cession peut être attaquée si elle a eu lieu pendant la période suspecte, que le tribunal peut faire remonter jusqu'à dix-huit mois avant le jugement d'ouverture, article L. 631-8 du Code de commerce. Ensuite, quand la cession est faite en garantie d'un crédit, ce que l'on appelle une cession fiduciaire, la créance revient à Dupont si le crédit est remboursé.</div>
+</section>
+
+<section id="s10">
+  <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
+  <h2>Trois situations pour le client</h2>
+  <div class="s6g">
+    <div class="cd"><span class="n">1</span><span class="t">Non informé<small>Il paie Dupont, qui reverse à la banque</small></span><span class="pastille"><svg class="ico"><use href="#c-personne"/></svg></span></div>
+    <div class="cd"><span class="n">2</span><span class="t">Notifié<small>Il paie la banque, et garde ses exceptions</small></span><span class="pastille"><svg class="ico"><use href="#c-facture"/></svg></span></div>
+    <div class="cd"><span class="n">3</span><span class="t">Acceptation<small>Il paie la banque, sans exception possible</small></span><span class="pastille"><svg class="ico"><use href="#c-signature"/></svg></span></div>
+  </div>
+  <p class="pied">Sources : Légifrance, art. L. 313-28, L. 313-29, R. 313-15 ; Cass. com., 17/12/2013, n° 12-26.706, (consulté le 21/10/2026)</p>
+  <div class="num">10 / 18</div>
+  <div class="notes">Troisième point : la situation de Martin. Elle dépend de ce que la banque a fait à son égard, et il y a trois cas, du moins engageant au plus engageant.
+
+Cas un : Martin n'a pas été informé. La notification est facultative : ce n'est ni une condition de validité de la cession, ni de son opposabilité. Martin continue donc de payer Dupont, qui reverse l'argent à la banque, et ce paiement est valable.
+
+Cas deux : Martin reçoit une notification, une notification, qui peut être faite par tout moyen, article R. 313-15. À partir de là, il ne peut plus payer Dupont, il doit payer la banque. Mais il garde ses exceptions : si les travaux sont défectueux, il peut refuser de payer la banque.
+
+Cas trois : Martin accepte la cession, par écrit. Il s'engage directement envers la banque, et ses exceptions ne sont plus opposables à la banque. Il doit payer même si les travaux sont mal faits, et il réglera le litige avec Dupont ensuite.</div>
+</section>
+
+<section id="s11">
+  <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
+  <h2>L'acceptation, un formalisme strict</h2>
+  <div class="duo">
+    <div class="ck r"><div class="tete"><small>Manuli Auto, 2003</small><span class="pastille r"><svg class="ico"><use href="#c-alerte"/></svg></span></div><div class="gros">6 sur 9</div><h3>factures refusées</h3><p>La lettre du débiteur n'était pas rédigée dans les termes de la loi : ce n'était pas une acceptation.</p></div>
+    <div class="ck n"><div class="tete"><small>Acceptation trop tôt</small><span class="pastille"><svg class="ico"><use href="#c-calendrier"/></svg></span></div><div class="gros">Sans portée</div><h3>avant la date du bordereau</h3><p>Il faut la confirmer par un acte conforme, signé après cette date.</p></div>
+  </div>
+  <p class="pied">Sources : Cass. com., 29/10/2003, n° 01-02.512 ; Cass. com., 03/11/2015, n° 14-14.373 ; Légifrance, art. L. 313-29, (consulté le 21/10/2026)</p>
+  <div class="num">11 / 18</div>
+  <div class="notes">L'acceptation est un acte très encadré, et la jurisprudence est stricte.
+
+Dans l'affaire Manuli Auto, en deux mille trois, un débiteur avait écrit à la banque qu'il s'engageait à payer neuf factures. Mais sa lettre n'était pas rédigée dans les termes exigés par l'article L. 313-29. La Cour de cassation a jugé que ce n'était pas une acceptation : le débiteur a pu refuser de payer six factures, en invoquant l'inexécution partielle du contrat.
+
+Autre précision : une acceptation donnée avant la date du bordereau n'a aucune portée. Il faut la confirmer par un acte conforme, signé après cette date. C'est ce que dit la Cour de cassation en deux mille quinze.
+
+Pour Martin, le message est clair : il faut bien réfléchir avant de signer.</div>
+</section>
+
+<section id="s12">
+  <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
+  <h2>La garantie du cédant</h2>
+  <div class="s12g">
+    <div class="liste">
+      <div><svg class="ic"><use href="#i-balance"/></svg><p style="margin:0"><b>Garant solidaire</b><span>Le signataire du bordereau garantit le paiement, art. L. 313-24</span></p></div>
+      <div><svg class="ico"><use href="#c-signature"/></svg><p style="margin:0"><b>Clause de non-recours</b><span>Une convention peut écarter cette garantie</span></p></div>
+      <div><svg class="ic"><use href="#i-euro"/></svg><p style="margin:0"><b>Demande amiable d'abord</b><span>La banque la justifie, sauf convention contraire</span></p></div>
+    </div>
+    <div class="ck b"><small>Hexgo Constructions, 2017</small><div class="gros" style="font-size:clamp(2rem,3.6vw,3.2rem)">Condamnation cassée</div><p>La banque avait poursuivi la caution du cédant sans avoir d'abord demandé le paiement à la commune débitrice.</p></div>
+  </div>
+  <p class="pied">Sources : Légifrance, art. L. 313-24 ; Cass. com., 18/01/2017, n° 15-12.951 ; Cass. com., 05/06/2012, n° 11-18.210, (consulté le 21/10/2026)</p>
+  <div class="num">12 / 18</div>
+  <div class="notes">Dernier point : la garantie du cédant. Sauf convention contraire, celui qui signe le bordereau, ici Dupont, est garant solidaire du paiement des créances cédées, article L. 313-24. Si Martin ne paie pas, la banque peut donc se retourner contre Dupont. Une convention peut écarter cette garantie : on parle de clause de non-recours.
+
+La banque n'a pas à poursuivre le débiteur en justice, mais elle doit justifier d'une demande amiable préalable, ou d'un événement qui rend le paiement impossible. Dans l'affaire Hexgo Constructions, en deux mille dix-sept, la Cour de cassation a cassé la condamnation de la caution du cédant : la banque avait poursuivi la caution avant de demander le paiement à la commune débitrice, et une simple mise en demeure après coup ne suffit pas. Une convention peut toutefois dispenser la banque de cette démarche.
+
+Enfin, cette garantie vaut peu si le cédant est lui-même en difficulté, c'est pourquoi la banque demande souvent une caution en plus.
+
+Pour conclure ma partie : un transfert immédiat et protégé, un client dont le sort dépend de son engagement, et un risque final qui revient au cédant. Je passe la parole à Nafissa pour le bilan.</div>
+</section>
+
+<section id="s13">
+  <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
+  <h2>Les avantages</h2>
+  <div class="duo">
+    <div class="ck v"><div class="tete"><small>Pour l'entreprise</small><span class="pastille"><svg class="ico"><use href="#c-billets"/></svg></span></div><h3>La rapidité</h3><p>Un bordereau remis à la banque, sans huissier ni formalité en plus.</p><div class="mots"><span>Trésorerie tout de suite</span><span>Un seul bordereau</span></div></div>
+    <div class="ck n"><div class="tete"><small>Pour la banque</small><span class="pastille"><svg class="ico"><use href="#c-bouclier"/></svg></span></div><h3>La sécurité</h3><p>Sûretés et accessoires transférés de plein droit, opposable dès la date du bordereau.</p><div class="mots"><span>Pas de saisie des autres créanciers</span></div></div>
+  </div>
+  <p class="pied">Sources : Légifrance, Code monétaire et financier, art. L. 313-23 et L. 313-27, (consulté le 21/10/2026)</p>
+  <div class="num">13 / 18</div>
+  <div class="notes">Pour finir, on va faire le bilan : à quoi sert vraiment la cession Dailly en pratique, et quelles sont ses limites ?
+
+Commençons par les avantages. Pour l'entreprise, le premier avantage est la rapidité. Il suffit de remettre un bordereau à la banque, sans huissier ni formalité supplémentaire. Selon l'article L. 313-27, la cession prend effet entre les parties et devient opposable aux tiers à la date apposée sur le bordereau. L'entreprise récupère donc rapidement de la trésorerie sur des factures qui ne seront payées que dans trente ou soixante jours. Et un seul bordereau peut regrouper de nombreuses créances.
+
+Pour la banque, l'intérêt est la sécurité. La remise du bordereau transfère de plein droit les sûretés, garanties et accessoires attachés aux créances. Et comme la cession est opposable aux tiers dès la date du bordereau, les autres créanciers de l'entreprise ne peuvent pas venir se servir sur ces créances.</div>
+</section>
+
+<section id="s14">
+  <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
+  <h2>Première limite : le formalisme</h2>
+  <div class="s2g" style="height:44vh">
+    <div class="bloc" style="background:var(--rouge)"><div class="grand" style="font-size:clamp(2.2rem,4.4vw,3.8rem)">Sans date</div><div class="leg" style="color:#fff">Aucun effet, même avec une notification au client</div></div>
+    <div class="pile3" style="grid-template-rows:repeat(2,1fr)">
+      <div class="kc"><svg><use href="#c-calendrier"/></svg><div><b>15 mars 2023</b><span>Bordereau sans date : privé de tout effet, la notification ne répare pas l'oubli</span></div></div>
+      <div class="kc n"><svg><use href="#c-pile"/></svg><div><b>14 février 2024</b><span>Sans bordereau complet, la cession n'est pas opposable au client, même notifié</span></div></div>
+    </div>
+  </div>
+  <p class="pied">Sources : Légifrance, art. L. 313-23 ; Cass. com., 15/03/2023, n° 21-24.490 ; Cass. com., 14/02/2024, n° 22-14.784, (consulté le 21/10/2026)</p>
+  <div class="num">14 / 18</div>
+  <div class="notes">Mais ce mécanisme a aussi des limites.
+
+Première limite, le formalisme est strict. L'article L. 313-23 liste les mentions obligatoires, et si l'une manque, le document ne vaut pas comme acte de cession Dailly. L'article L. 313-25 ajoute la signature du cédant et la date, apposée par la banque.
+
+La jurisprudence est sévère. Dans un arrêt du quinze mars deux mille vingt-trois, la Cour de cassation a jugé qu'un bordereau sans date est privé de tout effet, et qu'une notification au client ne répare pas cet oubli. En deux mille vingt-quatre, elle a rappelé que sans production d'un bordereau complet, la cession n'est pas opposable au client, même si celui-ci a reçu une notification.
+
+La banque doit donc être très rigoureuse.</div>
+</section>
+
+<section id="s15">
+  <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
+  <h2>Deuxième et troisième limites : le coût et le risque</h2>
+  <div class="s2g">
+    <div class="bloc"><div class="grand" style="font-size:clamp(2.2rem,4.2vw,3.6rem)">Intérêts et commissions</div><div class="leg">La banque se rémunère : cher pour une entreprise déjà fragile</div></div>
+    <div class="frise">
+      <div class="rangee"><div class="qui"><svg class="ic"><use href="#i-immeuble"/></svg>Dailly</div><div class="piste"><i style="left:0;width:100%;background:var(--rouge)">Le risque d'impayé reste chez l'entreprise</i></div></div>
+      <div class="rangee"><div class="qui"><svg class="ic"><use href="#i-banque"/></svg>Affacturage</div><div class="piste"><i style="left:0;width:100%;background:var(--vert)">Le risque peut être pris en charge</i></div></div>
+      <div class="jalons"><span>Le client ne paie pas</span><span>La banque se retourne contre l'entreprise<svg class="ic"><use href="#i-euro"/></svg></span></div>
+    </div>
+  </div>
+  <p class="pied">Sources : Légifrance, art. L. 313-24 ; Dalloz ; Lamy droit du financement, (consulté le 21/10/2026)</p>
+  <div class="num">15 / 18</div>
+  <div class="notes">Deuxième limite, le coût. La banque se rémunère par des intérêts et des commissions, ce qui peut être cher pour une entreprise déjà fragile.
+
+Troisième limite, l'entreprise n'est pas libérée de sa dette. Le signataire du bordereau reste garant solidaire du paiement des créances cédées. Si le client ne paie pas, la banque se retourne contre l'entreprise.
+
+Contrairement à l'affacturage, le risque d'impayé reste donc chez elle.</div>
+</section>
+
+<section id="s16">
+  <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
+  <h2>Quatrième limite : le client et la banque</h2>
+  <div class="s16g">
+    <div class="cd"><span class="pastille"><svg class="ico"><use href="#c-personne"/></svg></span><span class="t">Le client qui accepte<small>Engagé envers la banque, il ne peut plus opposer un défaut de marchandise ou de prestation</small></span><span class="n">L. 313-29</span></div>
+    <div class="cd"><span class="pastille"><svg class="ico"><use href="#c-banque"/></svg></span><span class="t">La banque, si le client n'a pas accepté<small>Elle subit ses exceptions, et doit vérifier que les factures sont réelles</small></span><span class="n">Factures fictives</span></div>
+  </div>
+  <p class="pied">Sources : Légifrance, art. L. 313-29 ; Dalloz ; Lamy droit du financement, (consulté le 21/10/2026)</p>
+  <div class="num">16 / 18</div>
+  <div class="notes">Quatrième limite, le client. S'il accepte la cession, article L. 313-29, il s'engage directement envers la banque et ne peut plus lui opposer les problèmes liés à la marchandise ou à la prestation. Il doit donc bien réfléchir avant de signer.
+
+Enfin, le risque de la banque. Si le client n'a pas accepté la cession, il peut opposer à la banque les exceptions qu'il aurait eues contre l'entreprise, par exemple une livraison défectueuse. Et une entreprise en difficulté peut être tentée de céder des factures fictives pour obtenir du cash. La banque doit donc vérifier la réalité des créances.</div>
+</section>
+
+<section id="s17">
+  <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
+  <h2>Dailly ou affacturage ?</h2>
+  <div class="duo">
+    <div class="ck b"><div class="tete"><small>Cession Dailly</small><span class="pastille"><svg class="ico"><use href="#c-pile"/></svg></span></div><h3>Mobiliser ses factures auprès de sa banque</h3><div class="mots"><span>Rapide</span><span>Sécurisée</span><span>Peu de formalités</span></div></div>
+    <div class="ck"><div class="tete"><small>Affacturage</small><span class="pastille" style="background:var(--fond)"><svg class="ico"><use href="#c-billets"/></svg></span></div><h3>Gestion complète du poste clients</h3><div class="mots"><span>Risque d'impayé possiblement pris en charge</span></div></div>
+  </div>
+  <p class="pied">Sources : Légifrance, art. L. 313-23 et suivants ; Dalloz ; Lamy droit du financement, (consulté le 21/10/2026)</p>
+  <div class="num">17 / 18</div>
+  <div class="notes">Pour conclure, la cession Dailly reste un outil très efficace de financement à court terme : rapide, sécurisée et peu coûteuse en formalités.
+
+L'affacturage, de son côté, propose une gestion complète du poste clients, avec en plus une prise en charge possible du risque d'impayé.
+
+Mais pour une entreprise qui veut simplement mobiliser ses factures auprès de sa banque, la Dailly reste une référence.
+
+Merci de votre attention.</div>
+</section>
+
+<section id="s18">
+  <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
+  <h2>Axes d'amélioration <span style="font-size:var(--fs-md);font-weight:400;color:var(--sourdine);letter-spacing:0">(page pour nous, à retirer avant le passage)</span></h2>
+  <div class="am">
+    <div class="p"><h3>Sofian<small>Slides 1 à 6 · ≈ 5 min 15</small></h3><b>Slides</b><p>La slide 4 est la plus chargée : garder la frise ou la liste, pas les deux.</p><b>À dire</b><p>Couper 30 secondes : un chiffre et une date par slide, sans les lire.</p></div>
+    <div class="p"><h3>Lia<small>Partie 2 · bordereau</small></h3><b>Slides</b><p>À ajouter entre les slides 6 et 7 : mentions du bordereau, escompte ou garantie. Son texte n'est pas encore dans le Doc.</p><b>À dire</b><p>Finir sur la date du bordereau, que Romane reprend juste après.</p></div>
+    <div class="p"><h3>Romane<small>Slides 7 à 12 · ≈ 5 min 40</small></h3><b>Slides</b><p>Une idée par slide, bonne progression. La slide 12 est la plus dense.</p><b>À dire</b><p>Trop long pour 5 minutes : ne citer qu'un arrêt à l'oral et expliquer « opposable aux tiers », « exceptions », « garant solidaire » avec des mots simples.</p></div>
+    <div class="p"><h3>Nafissa<small>Slides 13 à 17 · ≈ 3 min 15</small></h3><b>Slides</b><p>Les slides 14 à 16 reprennent des points de Romane : les présenter comme un bilan.</p><b>À dire</b><p>Il reste 1 min 30 : définir l'affacturage avant la conclusion et reprendre Dupont et Martin en exemple.</p></div>
+  </div>
+  <div class="groupe"><b>Pour tout le groupe :</b> garder Dupont et Martin dans toutes les parties, le même vocabulaire (cédant, cessionnaire, débiteur cédé), préparer les transitions et chronométrer l'ensemble : 20 minutes. <b>Références vérifiées sur Légifrance le 21/10 :</b> quelques points à corriger dans vos textes du Doc (liste de vérification).</div>
+  <p class="pied">Durées estimées à 150 mots par minute, d'après les notes orateur (touche N)</p>
+  <div class="num">18 / 18</div>
+  <div class="notes">Cette page n'est pas pour la présentation : elle sert à nous améliorer avant le passage, à retirer ensuite.
+
+Durées estimées d'après les notes orateur, à 150 mots par minute : environ 5 min 15 pour la partie 1, 5 min 40 pour la partie 3 et 3 min 15 pour la partie 4. Il manque la partie 2 de Lia, qui doit se glisser entre les slides 6 et 7.
+
+Références à corriger dans les textes du Doc, après vérification sur Légifrance le 21/10 : (1) la date du bordereau est apposée par la banque, article L. 313-25, et non L. 313-27 ; (2) dans l'affaire Hexgo, la Cour de cassation casse la condamnation de la caution, elle ne déclare pas le recours irrecevable ; (3) l'arrêt du 1er avril 2008 ne porte pas sur le cessionnaire qui agit sciemment : cette exception est dans l'article L. 313-29 lui-même ; (4) la formule « soit en garantie, soit en pleine propriété pour escompte ou crédit » n'est pas dans l'article L. 313-23. Il faut aussi décider qui explique quels mots simples.</div>
+</section>
+
+<div class="toast"></div>
+
+<script>
+const secs=[...document.querySelectorAll('section')];
+let i=0;
+/* ---------- notes orateur modifiables (touche N) : clic pour écrire, Échap pour sortir, C pour copier ---------- */
+const CLE_N='notes-expose-dailly-fr';
+let notesPerso={}; try{notesPerso=JSON.parse(localStorage.getItem(CLE_N)||'{}')}catch(e){notesPerso={}}
+const sauverNotes=()=>{try{localStorage.setItem(CLE_N,JSON.stringify(notesPerso))}catch(e){}};
+const notesEls=[...document.querySelectorAll('section .notes')];
+notesEls.forEach(n=>{const id=n.closest('section').id; n._orig=n.innerText.trim(); n.contentEditable='true'; n.spellcheck=true;
+  n.dataset.aide='Clic pour modifier · Échap pour sortir · C pour copier';
+  if(notesPerso[id]!=null){ if(notesPerso[id]===n._orig) delete notesPerso[id]; else n.innerText=notesPerso[id]; }
+  n.addEventListener('input',()=>{const t=n.innerText.trim(); if(t===n._orig) delete notesPerso[id]; else notesPerso[id]=t; sauverNotes();});
+});
+const toast=document.querySelector('.toast');
+function prevenir(t){toast.textContent=t; toast.classList.add('on'); clearTimeout(prevenir._t); prevenir._t=setTimeout(()=>toast.classList.remove('on'),2200);}
+function copier(txt){ if(navigator.clipboard&&navigator.clipboard.writeText) return navigator.clipboard.writeText(txt).catch(()=>{});
+  const a=document.createElement('textarea'); a.value=txt; document.body.appendChild(a); a.select(); try{document.execCommand('copy')}catch(e){} a.remove(); }
+function toutCopier(){
+  const tout={}; notesEls.forEach(n=>{const sec=n.closest('section'), id=sec.id; if(notesPerso[id]!=null) tout['notes|'+id+' (slide '+(secs.indexOf(sec)+1)+')']=notesPerso[id];});
+  copier(JSON.stringify(tout,null,1));
+  const nb=Object.keys(notesPerso).length; prevenir('Copié : '+(nb?nb+' note(s) modifiée(s)':'aucune note modifiée'));
+}
+/* ---------- navigation ---------- */
+const liens=[...document.querySelectorAll('.rail a[href^="#s"]')];
+const barre=document.querySelector('.rail .bar i');
+function maj(){ secs.forEach((s,k)=>s.classList.toggle('ici',k===i)); liens.forEach((a,k)=>a.classList.toggle('on',k===i)); if(barre) barre.style.height=((i+1)/secs.length*100)+'%'; }
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){i=secs.indexOf(e.target);maj();}})},{threshold:.6});
+secs.forEach(s=>io.observe(s)); maj();
+function aller(n){i=Math.max(0,Math.min(secs.length-1,n));secs[i].scrollIntoView({behavior:'smooth'});}
+addEventListener('keydown',e=>{
+  const k=e.key;
+  if(document.activeElement&&document.activeElement.classList&&document.activeElement.classList.contains('notes')){ if(k==='Escape'){e.preventDefault();document.activeElement.blur();} return; }
+  if((k==='c'||k==='C')&&!e.metaKey&&!e.ctrlKey){toutCopier();return;}
+  if(k==='n'||k==='N'){document.body.classList.toggle('notesvues');return;}
+  if(['ArrowDown','ArrowRight','PageDown',' '].includes(k)){e.preventDefault();aller(i+1);}
+  else if(['ArrowUp','ArrowLeft','PageUp'].includes(k)){e.preventDefault();aller(i-1);}
+  else if(k==='Home'){e.preventDefault();aller(0);}
+  else if(k==='End'){e.preventDefault();aller(secs.length-1);}
+});
+</script>
+</body>
+</html>
