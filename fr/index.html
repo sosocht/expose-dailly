@@ -208,17 +208,20 @@ strong{font-weight:600}
 
 
 /* ===== exposé complet : parties 3 et 4, page d'axes, animations ===== */
-.photo{border-radius:var(--r);overflow:hidden;position:relative;background:#d9d9d6}
+.photo{border-radius:var(--r);overflow:hidden;position:relative;background:#d9d9d6;isolation:isolate}
 .photo img{width:100%;height:100%;object-fit:cover;display:block}
+.fig{margin:0;display:flex;flex-direction:column;gap:.8vh;min-height:0}
+.fig .photo{flex:1;min-height:0}
+.credit2{font-size:12px;font-weight:300;color:var(--tenu);line-height:1.2}
 .chip{position:absolute;left:1.2vw;top:1.4vh;background:#fff;color:var(--encre);border:1px solid var(--encre);border-radius:999px;padding:.3em 1em;font-weight:600;font-size:var(--fs-md);z-index:2}
 .chip.n{background:var(--encre);color:#fff}
 .credit{position:absolute;right:.8vw;bottom:.6vh;font-size:11px;font-weight:300;color:rgba(255,255,255,.85);z-index:2;text-shadow:0 0 4px rgba(0,0,0,.6)}
 .carte{background:var(--carte);border:1px solid var(--filet);border-radius:var(--r)}
-.zoom{position:absolute;background:#fff;border:1px solid var(--filet);border-radius:var(--r);box-shadow:0 6px 18px rgba(10,10,10,.14);padding:1.4vh 1.2vw;font-size:clamp(15px,1.3vw,1.2rem);line-height:1.3;font-weight:500;z-index:5}
+.zoom{background:#fff;border:1px solid var(--filet);border-radius:var(--r);box-shadow:0 6px 18px rgba(10,10,10,.14);padding:1.4vh 1.2vw;font-size:clamp(15px,1.3vw,1.2rem);line-height:1.3;font-weight:500}
 .zoom small{display:block;font-size:var(--fs-sm);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--sourdine);margin-bottom:.4vh}
 .preuve{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--filet);background:#fff;box-shadow:0 8px 24px rgba(10,10,10,.1)}
 .preuve img{width:100%;display:block}
-.tampon{display:inline-block;border:4px solid var(--rouge);color:var(--rouge);border-radius:12px;padding:.3em .9em;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:clamp(1.1rem,2vw,1.8rem);transform:rotate(-6deg);background:#fff}
+.tampon{display:inline-block;white-space:nowrap;margin:1.6vh .8vw 1vh;border:4px solid var(--rouge);color:var(--rouge);border-radius:12px;padding:.3em .9em;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:clamp(1rem,1.6vw,1.5rem);transform:rotate(-6deg);background:#fff}
 .tabl{width:100%;border-collapse:separate;border-spacing:0 1.1vh;font-size:var(--fs-md)}
 .tabl th{text-align:left;font-size:var(--fs-sm);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--sourdine);padding:0 1.2vw}
 .tabl td{background:var(--carte);padding:1.7vh 1.2vw;border-top:1px solid var(--filet);border-bottom:1px solid var(--filet);font-size:var(--fs-chiffre);font-weight:500;letter-spacing:-.02em;line-height:1.15}
@@ -230,8 +233,23 @@ strong{font-weight:600}
 .tline svg{width:100%;height:100%;display:block}
 .tf2{font-family:var(--sans);font-size:24px;font-weight:600;fill:#0a0a0a} .tm2{font-family:var(--sans);font-size:19px;font-weight:400;fill:rgba(10,10,10,.6)}
 .s7w{display:grid;grid-template-columns:34% 1fr;gap:2.4vw;height:54vh}
-.s7w .photo{height:100%}
-.s8w{display:grid;grid-template-columns:1fr 38%;gap:2.4vw;height:54vh;align-items:stretch}
+.s7w .fig{height:100%}
+.s8w{display:grid;grid-template-columns:1fr 38%;gap:2.4vw;height:56vh;align-items:start}
+.colg{display:flex;flex-direction:column;gap:1.8vh;min-height:0}
+.s11g{display:grid;grid-template-columns:34% 1fr;gap:2vw;height:58vh}
+.s11g .fig{height:100%}
+.s11g .dr{display:grid;grid-template-rows:auto minmax(0,1fr);gap:1.6vh;min-height:0}
+.s11g .duo3{display:grid;grid-template-columns:1fr 1fr;gap:1.6vw}
+.s11g .don{width:100%;max-height:27vh}
+.s11g .preuve{min-height:0;height:100%}
+.s17g{display:grid;grid-template-columns:44% 1fr;gap:2vw;height:58vh}
+.s17g .fig{height:100%}
+.s17g .dr2{display:flex;flex-direction:column;gap:1.6vh;min-height:0}
+.s17g .dr2 .ck{flex:1;padding:1.8vh 1.6vw;gap:1.2vh;min-height:0}
+.s17g .dr2 .ck h3{font-size:clamp(1.2rem,2.1vw,1.8rem)}
+.s17g .dr2 .ck .pastille{width:8vh;height:8vh}.s17g .dr2 .ck .pastille .ico{width:6vh;height:6vh}
+.s17g .dr2 .ck .mots{margin-top:auto}
+.s17g .merci2{font-size:clamp(1.3rem,2.2vw,2rem);font-weight:600;letter-spacing:-.035em;padding:0 .4vw}
 .s8w .col{display:flex;flex-direction:column;gap:1.6vh;justify-content:center}
 .s9w{display:grid;grid-template-rows:auto minmax(0,1fr);gap:2vh;height:54vh}
 .s9h{display:grid;grid-template-columns:20vh 1fr;gap:2vw;align-items:center}
@@ -253,10 +271,10 @@ strong{font-weight:600}
 .w .dessin{flex:1;display:grid;place-items:center;min-height:0}
 .w .dessin svg{width:100%;height:100%;max-height:26vh}
 .w.v{background:var(--vert);color:#fff;border-color:var(--vert)} .w.n{background:var(--encre);color:#fff;border-color:var(--encre)} .w.b{background:var(--bleu);color:#fff;border-color:var(--bleu)}
-.s14w{display:grid;grid-template-columns:54% 1fr;gap:2.4vw;height:56vh;align-items:center}
+.s14w{display:grid;grid-template-columns:54% 1fr;gap:2.4vw;height:56vh;align-items:start}
 .s14w .col{display:flex;flex-direction:column;gap:1.8vh}
 .s15w{display:grid;grid-template-rows:auto 1fr;gap:1.4vh;height:56vh}
-.s16w{display:grid;grid-template-columns:1fr 34%;gap:2.4vw;height:56vh;align-items:center}
+.s16w{display:grid;grid-template-columns:1fr 36%;gap:2.4vw;height:56vh;align-items:center}
 .s17w{position:relative;height:60vh;border-radius:var(--r);overflow:hidden}
 .s17w .bg{position:absolute;inset:0}
 .s17w .bg img{width:100%;height:100%;object-fit:cover}
@@ -289,9 +307,12 @@ strong{font-weight:600}
   @keyframes a-zoom{from{transform:scale(1)}to{transform:scale(1.09)}}
   @keyframes a-tourne{to{transform:rotate(360deg)}}
   @keyframes a-balance{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
-  @keyframes a-roule{from{transform:translateX(0)}to{transform:translateX(920px)}}
+  @keyframes a-roule{from{transform:translateX(60px)}to{transform:translateX(860px)}}
   @keyframes a-balai{0%{opacity:0;transform:translateX(-2vw)}12%,88%{opacity:1;transform:translateX(0)}100%{opacity:0;transform:translateX(2vw)}}
   @keyframes a-roule2{from{transform:translateX(0)}to{transform:translateX(580px)}}
+  @keyframes a-incline{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+  @keyframes a-monteg{0%,100%{transform:translateY(23px)}50%{transform:translateY(-23px)}}
+  @keyframes a-monted{0%,100%{transform:translateY(-23px)}50%{transform:translateY(23px)}}
   @keyframes a-grandit{from{transform:scaleY(0)}}
   @keyframes a-arc{from{stroke-dashoffset:var(--dd)}}
   @keyframes a-ticks{from{opacity:0;transform:scale(.4)}}
@@ -346,10 +367,11 @@ strong{font-weight:600}
   #s10.ici .tabl tbody tr:nth-child(2){animation-delay:.3s} #s10.ici .tabl tbody tr:nth-child(3){animation-delay:.6s}
   #s10.ici .lig .ico,#s15.ici .lig .ico{animation:a-flotte 4.5s ease-in-out infinite}
   /* S11 : jauge 6 sur 9, pièce qui bouge */
-  #s11.ici .s11w .bg img{animation:a-zoom 20s ease-out forwards}
+  #s11.ici .photo img{animation:a-zoom 20s ease-out forwards}
   #s11.ici .don .arc{animation:a-arc 2s .5s ease-out backwards}
   #s11.ici .pv{animation:a-monte 1s .6s ease-out backwards}
-  #s11.ici .s11w .t2{animation:a-monte .9s .3s ease-out backwards}
+  #s11.ici .duo3 .w{animation:a-monte .9s .3s ease-out backwards}
+  #s11.ici .duo3 .w:nth-child(2){animation-delay:.6s}
   /* S12 : le recours revient vers le cédant */
   #s12.ici .flux2{stroke-dasharray:10 9;animation:s5flux 5s linear infinite}
   #s12.ici .noeud{animation:a-monte .7s ease-out backwards}
@@ -374,13 +396,15 @@ strong{font-weight:600}
   #s15.ici .tabl tbody tr{animation:a-droite .8s ease-out backwards}
   #s15.ici .tabl tbody tr:nth-child(2){animation-delay:.3s} #s15.ici .tabl tbody tr:nth-child(3){animation-delay:.6s}
   /* S16 : la balance oscille */
-  #s16.ici .fleau{animation:a-balance 6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+  #s16.ici .poutre{animation:a-incline 6s ease-in-out infinite;transform-box:view-box;transform-origin:450px 111px}
+  #s16.ici .plg{animation:a-monteg 6s ease-in-out infinite}
+  #s16.ici .pld{animation:a-monted 6s ease-in-out infinite}
   #s16.ici .pv2{animation:a-droite .9s .4s ease-out backwards}
   /* S17 : photo qui respire, cartes qui montent */
-  #s17.ici .s17w .bg img{animation:a-zoom 20s ease-out forwards}
+  #s17.ici .photo img{animation:a-zoom 20s ease-out forwards}
   #s17.ici .ck{animation:a-monte .9s ease-out backwards}
   #s17.ici .ck:nth-child(2){animation-delay:.3s}
-  #s17.ici .merci{animation:a-monte 1s .9s ease-out backwards}
+  #s17.ici .merci2{animation:a-monte 1s .9s ease-out backwards}
   /* S18 */
   #s18.ici .am .p{animation:a-monte .7s ease-out backwards}
   #s18.ici .am .p:nth-child(2){animation-delay:.15s} #s18.ici .am .p:nth-child(3){animation-delay:.3s} #s18.ici .am .p:nth-child(4){animation-delay:.45s}
@@ -604,7 +628,7 @@ Quand ces conditions sont réunies, on peut passer à la formalité : le bordere
   <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
   <h2>Un exemple fil rouge</h2>
   <div class="s7w">
-    <div class="photo"><img src="../assets/img/peintre-batiment.jpg" alt="Peintre en bâtiment au travail"><span class="chip">Dupont, travaux de peinture</span><span class="credit">Photo : Lukeroberts, CC BY-SA 2.5, Wikimedia Commons</span></div>
+    <figure class="fig"><div class="photo"><img src="../assets/img/peintre-batiment.jpg" alt="Peintre en bâtiment au travail"></div><figcaption class="credit2">Photo : Lukeroberts, CC BY-SA 2.5, Wikimedia Commons</figcaption></figure>
     <div class="tline"><svg viewBox="0 0 1100 440" role="img" aria-label="Frise : la facture de 10 000 euros, du jour 0 au jour 60">
       <path class="ligne" d="M 90 290 H 1010" fill="none" stroke="#0a0a0a" stroke-width="6" stroke-linecap="round" style="stroke-dasharray:920;--dd:920px"/>
       <path d="M 120 235 C 200 120 360 90 490 100" fill="none" stroke="#1d9bf0" stroke-width="4" stroke-dasharray="10 9" class="flux2"/><polygon points="486,86 514,101 486,114" fill="#1d9bf0"/>
@@ -633,8 +657,8 @@ Je vais vous montrer trois choses : comment la créance passe à la banque, ce q
   <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
   <h2>La date du bordereau fixe le transfert</h2>
   <div class="s8w">
-    <div class="fonds"><div class="preuve"><img src="../assets/preuves/l313-27.png" alt="Légifrance, article L. 313-27" style="max-height:52vh;object-fit:contain;object-position:left top"></div>
-      <div class="zoom" style="right:-1.4vw;bottom:-1.6vh;max-width:62%"><small>L. 313-27</small>« prend effet entre les parties et devient opposable aux tiers à la date apposée sur le bordereau lors de sa remise »</div></div>
+    <div class="colg"><div class="preuve"><img src="../assets/preuves/l313-27.png" alt="Légifrance, article L. 313-27" style="max-height:36vh;object-fit:contain;object-position:left top"></div>
+      <div class="zoom"><small>L. 313-27</small>« prend effet entre les parties et devient opposable aux tiers à la date apposée sur le bordereau lors de sa remise »</div></div>
     <div class="col">
       <div class="kc"><svg><use href="#c-signature"/></svg><div><b>Entre les parties</b><span>Dupont et la banque sont liés dès la remise</span></div></div>
       <div class="kc n"><svg><use href="#c-calendrier"/></svg><div><b>La date du bordereau</b><span>Apposée par la banque (L. 313-25), pas le jour du paiement</span></div></div>
@@ -701,12 +725,16 @@ Cas trois : Martin accepte la cession, par écrit. Il s'engage directement enver
 <section id="s11">
   <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
   <h2>L'acceptation, un formalisme strict</h2>
-  <div class="s11w"><div class="bg"><img src="../assets/img/cour-cassation.jpg" alt="Palais de justice de Paris, Cour de cassation"></div>
-    <div class="in">
-      <div class="t2"><h3>Manuli Auto, 2003</h3><p>Une lettre qui n'est pas rédigée dans les termes de la loi n'est pas une acceptation.</p><h3 style="margin-top:3vh">Acceptation trop tôt</h3><p>Avant la date du bordereau, elle est sans portée : il faut la confirmer après.</p></div>
-      <div style="display:grid;place-items:center"><svg class="don" viewBox="0 0 200 200" role="img" aria-label="6 factures sur 9 refusées"><circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="22"/><circle class="arc" cx="100" cy="100" r="80" fill="none" stroke="#1d9bf0" stroke-width="22" stroke-linecap="round" stroke-dasharray="335 503" transform="rotate(-90 100 100)" style="--dd:335px"/><text x="100" y="112" text-anchor="middle" fill="#fff" style="font-family:var(--sans);font-size:46px;font-weight:600">6 sur 9</text><text x="100" y="140" text-anchor="middle" fill="rgba(255,255,255,.8)" style="font-family:var(--sans);font-size:15px">factures refusées</text></svg></div>
-      <div class="preuve pv"><img src="../assets/preuves/manuli-auto.png" alt="Légifrance, Cass. com., 29 octobre 2003"></div>
-    </div><span class="credit" style="right:1vw;bottom:.8vh">Photo : DXR, CC BY-SA 3.0, Wikimedia Commons</span></div>
+  <div class="s11g">
+    <figure class="fig"><div class="photo"><img src="../assets/img/cour-cassation.jpg" alt="Palais de justice de Paris, Cour de cassation" style="object-position:35% 50%"></div><figcaption class="credit2">Photo : DXR, CC BY-SA 3.0, Wikimedia Commons</figcaption></figure>
+    <div class="dr">
+      <div class="duo3">
+        <div class="w" style="justify-content:center"><div><h3>Manuli Auto, 2003</h3><p style="margin:.6vh 0 0;font-size:var(--fs-md);line-height:1.35;color:var(--sourdine)">Une lettre qui n'est pas rédigée dans les termes de la loi n'est pas une acceptation.</p></div><div style="margin-top:1.4vh"><h3>Acceptation trop tôt</h3><p style="margin:.6vh 0 0;font-size:var(--fs-md);line-height:1.35;color:var(--sourdine)">Avant la date du bordereau, elle est sans portée : il faut la confirmer après.</p></div></div>
+        <div class="w n" style="align-items:center;justify-content:center"><svg class="don" viewBox="0 0 200 200" role="img" aria-label="6 factures sur 9 refusées"><circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="22"/><circle class="arc" cx="100" cy="100" r="80" fill="none" stroke="#1d9bf0" stroke-width="22" stroke-linecap="round" stroke-dasharray="335 503" transform="rotate(-90 100 100)" style="--dd:335px"/><text x="100" y="108" text-anchor="middle" fill="#fff" style="font-family:var(--sans);font-size:34px;font-weight:600">6 sur 9</text><text x="100" y="134" text-anchor="middle" fill="rgba(255,255,255,.8)" style="font-family:var(--sans);font-size:13px">factures refusées</text></svg></div>
+      </div>
+      <div class="preuve pv"><img src="../assets/preuves/manuli-auto.png" alt="Légifrance, Cass. com., 29 octobre 2003" style="width:100%;height:100%;object-fit:cover;object-position:left 30%"></div>
+    </div>
+  </div>
   <p class="pied">Sources : Cass. com., 29/10/2003, n° 01-02.512 ; Cass. com., 03/11/2015, n° 14-14.373 ; Légifrance, art. L. 313-29, (consulté le 21/10/2026)</p>
   <div class="num">11 / 18</div>
   <div class="notes">L'acceptation est un acte très encadré, et la jurisprudence est stricte.
@@ -771,10 +799,11 @@ Pour la banque, l'intérêt est la sécurité. La remise du bordereau transfère
   <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
   <h2>Première limite : le formalisme</h2>
   <div class="s14w">
-    <div class="fonds"><div class="preuve"><img src="../assets/preuves/cass-2023.png" alt="Légifrance, Cass. com., 15 mars 2023" style="max-height:52vh;object-fit:contain;object-position:left top"></div><span class="tampon tampon-a" style="position:absolute;left:2vw;bottom:-2.4vh">Sans date : aucun effet</span></div>
+    <div class="preuve"><img src="../assets/preuves/cass-2023.png" alt="Légifrance, Cass. com., 15 mars 2023" style="max-height:50vh;object-fit:contain;object-position:left top"></div>
     <div class="col">
       <div class="kc"><svg><use href="#c-calendrier"/></svg><div><b>15 mars 2023</b><span>Bordereau sans date : privé de tout effet, la notification ne répare pas l'oubli</span></div></div>
       <div class="kc n"><svg><use href="#c-pile"/></svg><div><b>14 février 2024</b><span>Sans bordereau complet, la cession n'est pas opposable au client, même notifié</span></div></div>
+      <div><span class="tampon tampon-a">Sans date : aucun effet</span></div>
     </div>
   </div>
   <p class="pied">Sources : Légifrance, art. L. 313-23 ; Cass. com., 15/03/2023, n° 21-24.490 ; Cass. com., 14/02/2024, n° 22-14.784, (consulté le 21/10/2026)</p>
@@ -813,13 +842,12 @@ Contrairement à l'affacturage, le risque d'impayé reste donc chez elle.</div>
   <h2>Quatrième limite : le client et la banque</h2>
   <div class="s16w">
     <div class="tline"><svg viewBox="-40 0 980 470" role="img" aria-label="Balance : le client qui accepte, la banque"><rect x="436" y="120" width="28" height="300" rx="6" fill="#0a0a0a"/><rect x="330" y="415" width="240" height="22" rx="10" fill="#0a0a0a"/>
-      <g class="fleau"><rect x="90" y="100" width="720" height="22" rx="11" fill="#0a0a0a"/><circle cx="450" cy="111" r="18" fill="#1d9bf0"/>
-        <path d="M 120 122 L 60 250 M 120 122 L 200 250" stroke="#0a0a0a" stroke-width="4" fill="none"/><path d="M 780 122 L 700 250 M 780 122 L 840 250" stroke="#0a0a0a" stroke-width="4" fill="none"/>
-        <rect x="0" y="250" width="280" height="130" rx="18" fill="#1d9bf0"/><text x="140" y="300" text-anchor="middle" fill="#fff" style="font-family:var(--sans);font-size:22px;font-weight:600">Le client qui accepte</text><text x="140" y="338" text-anchor="middle" fill="#fff" style="font-family:var(--sans);font-size:19px">Exceptions perdues</text>
-        <rect x="620" y="250" width="280" height="130" rx="18" fill="#0a0a0a"/><text x="760" y="300" text-anchor="middle" fill="#fff" style="font-family:var(--sans);font-size:24px;font-weight:600">La banque</text><text x="760" y="338" text-anchor="middle" fill="#fff" style="font-family:var(--sans);font-size:19px">Factures à vérifier</text></g>
+      <g class="poutre"><rect x="90" y="100" width="720" height="22" rx="11" fill="#0a0a0a"/><circle cx="450" cy="111" r="18" fill="#1d9bf0"/></g>
+      <g class="plg"><path d="M 120 112 L 60 250 M 120 112 L 200 250" stroke="#0a0a0a" stroke-width="4" fill="none"/><rect x="0" y="250" width="280" height="130" rx="18" fill="#1d9bf0"/><text x="140" y="300" text-anchor="middle" fill="#fff" style="font-family:var(--sans);font-size:22px;font-weight:600">Le client qui accepte</text><text x="140" y="338" text-anchor="middle" fill="#fff" style="font-family:var(--sans);font-size:19px">Exceptions perdues</text></g>
+      <g class="pld"><path d="M 780 112 L 700 250 M 780 112 L 840 250" stroke="#0a0a0a" stroke-width="4" fill="none"/><rect x="620" y="250" width="280" height="130" rx="18" fill="#0a0a0a"/><text x="760" y="300" text-anchor="middle" fill="#fff" style="font-family:var(--sans);font-size:24px;font-weight:600">La banque</text><text x="760" y="338" text-anchor="middle" fill="#fff" style="font-family:var(--sans);font-size:19px">Factures à vérifier</text></g>
     </svg></div>
-    <div class="fonds pv2"><div class="preuve"><img src="../assets/preuves/l313-29.png" alt="Légifrance, article L. 313-29" style="max-height:44vh;object-fit:contain;object-position:left top"></div>
-      <div class="zoom" style="left:-2vw;bottom:-2vh;max-width:90%"><small>L. 313-29</small>« le débiteur ne peut opposer à l'établissement de crédit […] les exceptions fondées sur ses rapports personnels avec le signataire du bordereau »</div></div>
+    <div class="colg pv2"><div class="preuve"><img src="../assets/preuves/l313-29.png" alt="Légifrance, article L. 313-29" style="max-height:26vh;object-fit:contain;object-position:left top"></div>
+      <div class="zoom"><small>L. 313-29</small>« le débiteur ne peut opposer à l'établissement de crédit […] les exceptions fondées sur ses rapports personnels avec le signataire du bordereau »</div></div>
   </div>
   <p class="pied">Sources : Légifrance, art. L. 313-29 ; Dalloz ; Lamy droit du financement, (consulté le 21/10/2026)</p>
   <div class="num">16 / 18</div>
@@ -831,11 +859,14 @@ Enfin, le risque de la banque. Si le client n'a pas accepté la cession, il peut
 <section id="s17">
   <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
   <h2>Dailly ou affacturage ?</h2>
-  <div class="s17w"><div class="bg"><img src="../assets/img/banque.jpg" alt="Façade d'une banque"></div>
-    <div class="in"><div class="duo2">
+  <div class="s17g">
+    <figure class="fig"><div class="photo"><img src="../assets/img/banque.jpg" alt="Façade d'une banque" style="object-position:50% 40%"></div><figcaption class="credit2">Photo : Chabe01, CC0, Wikimedia Commons</figcaption></figure>
+    <div class="dr2">
       <div class="ck b"><div class="tete"><small>Cession Dailly</small><span class="pastille"><svg class="ico"><use href="#c-pile"/></svg></span></div><h3>Mobiliser ses factures auprès de sa banque</h3><div class="mots"><span>Rapide</span><span>Sécurisée</span><span>Peu de formalités</span></div></div>
       <div class="ck"><div class="tete"><small>Affacturage</small><span class="pastille" style="background:var(--fond)"><svg class="ico"><use href="#c-billets"/></svg></span></div><h3>Gestion complète du poste clients</h3><div class="mots"><span>Risque d'impayé possiblement pris en charge</span></div></div>
-    </div><div class="merci">Merci de votre attention</div></div><span class="credit" style="right:1vw;bottom:.8vh">Photo : Chabe01, CC0, Wikimedia Commons</span></div>
+      <div class="merci2">Merci de votre attention</div>
+    </div>
+  </div>
   <p class="pied">Sources : Légifrance, art. L. 313-23 et suivants ; Dalloz ; Lamy droit du financement, (consulté le 21/10/2026)</p>
   <div class="num">17 / 18</div>
   <div class="notes">Pour conclure, la cession Dailly reste un outil très efficace de financement à court terme : rapide, sécurisée et peu coûteuse en formalités.
