@@ -233,9 +233,9 @@ strong{font-weight:600}
 .s7w .photo{height:100%}
 .s8w{display:grid;grid-template-columns:1fr 38%;gap:2.4vw;height:54vh;align-items:stretch}
 .s8w .col{display:flex;flex-direction:column;gap:1.6vh;justify-content:center}
-.s9w{display:grid;grid-template-rows:auto 1fr;gap:2vh;height:56vh}
+.s9w{display:grid;grid-template-rows:auto minmax(0,1fr);gap:2vh;height:54vh}
 .s9h{display:grid;grid-template-columns:20vh 1fr;gap:2vw;align-items:center}
-.s9h .bou{width:20vh;height:20vh}
+.s9h .bou{width:16vh;height:16vh}
 .s11w{position:relative;height:60vh;border-radius:var(--r);overflow:hidden;color:#fff}
 .s11w .bg{position:absolute;inset:0}
 .s11w .bg img{width:100%;height:100%;object-fit:cover}
@@ -266,6 +266,11 @@ strong{font-weight:600}
 .s17w .merci{color:#fff;font-size:clamp(1.6rem,3.2vw,2.8rem);font-weight:600;letter-spacing:-.035em}
 .pied.cl{color:rgba(255,255,255,.7)}
 .fonds{position:relative}
+.lig{display:flex;align-items:center;gap:1vw}
+.lig .ico{width:6.4vh;height:6.4vh;flex:none}
+.lig small{display:block;font-size:var(--fs-md);font-weight:400;color:var(--sourdine);letter-spacing:0;margin-top:.3vh}
+.tabl.big td{padding:2.6vh 1.2vw}
+.pl.big{font-size:var(--fs-chiffre);padding:.25em 1em;font-weight:600}
 .barre{height:5.4vh;border-radius:999px;background:#fff;color:var(--vert);font-weight:600;display:flex;align-items:center;padding:0 1.2vw;font-size:var(--fs-md);white-space:nowrap}
 .barre-c{background:var(--encre)}
 .credit{font-size:12px;background:rgba(10,10,10,.55);padding:.1em .7em;border-radius:999px;text-shadow:none}
@@ -286,6 +291,7 @@ strong{font-weight:600}
   @keyframes a-balance{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
   @keyframes a-roule{from{transform:translateX(0)}to{transform:translateX(920px)}}
   @keyframes a-balai{0%{opacity:0;transform:translateX(-2vw)}12%,88%{opacity:1;transform:translateX(0)}100%{opacity:0;transform:translateX(2vw)}}
+  @keyframes a-roule2{from{transform:translateX(0)}to{transform:translateX(580px)}}
   @keyframes a-grandit{from{transform:scaleY(0)}}
   @keyframes a-arc{from{stroke-dashoffset:var(--dd)}}
   @keyframes a-ticks{from{opacity:0;transform:scale(.4)}}
@@ -332,11 +338,13 @@ strong{font-weight:600}
   /* S9 : bouclier qui pulse, zone suspecte qui se remplit */
   #s9.ici .bou{animation:a-pulse 3.2s ease-in-out infinite}
   #s9.ici .zone{animation:a-trace 2s .6s ease-out backwards}
+  #s9.ici .bille2{animation:a-roule2 6s 1.2s ease-in-out infinite alternate}
   #s9.ici .pt{animation:a-monte .7s ease-out backwards}
   #s9.ici .pt.p2{animation-delay:.5s} #s9.ici .pt.p3{animation-delay:1s}
   /* S10 : le tableau se déroule ligne par ligne */
   #s10.ici .tabl tbody tr{animation:a-droite .8s ease-out backwards}
   #s10.ici .tabl tbody tr:nth-child(2){animation-delay:.3s} #s10.ici .tabl tbody tr:nth-child(3){animation-delay:.6s}
+  #s10.ici .lig .ico,#s15.ici .lig .ico{animation:a-flotte 4.5s ease-in-out infinite}
   /* S11 : jauge 6 sur 9, pièce qui bouge */
   #s11.ici .s11w .bg img{animation:a-zoom 20s ease-out forwards}
   #s11.ici .don .arc{animation:a-arc 2s .5s ease-out backwards}
@@ -653,12 +661,13 @@ Et c'est pour cela que la date est une mention essentielle. Un bordereau qui n'e
         <div><svg class="ico"><use href="#c-immeuble"/></svg><p style="margin:0"><b>La créance sort du patrimoine du cédant</b><span>Ses autres créanciers ne peuvent pas la saisir</span></p></div>
         <div><svg class="ico"><use href="#c-pile"/></svg><p style="margin:0"><b>Les sûretés suivent la créance</b><span>Même si Dupont est en redressement ou en liquidation</span></p></div>
       </div></div>
-    <div class="carte" style="padding:1.6vh 1.6vw"><div class="tline" style="height:22vh"><svg viewBox="0 0 1200 250" role="img" aria-label="Période suspecte : jusqu'à 18 mois avant le jugement d'ouverture">
-      <path d="M 40 140 H 1160" stroke="#0a0a0a" stroke-width="5" stroke-linecap="round"/>
-      <g class="zone"><rect x="300" y="116" width="700" height="48" rx="24" fill="#ff0000"/><text x="650" y="148" text-anchor="middle" fill="#fff" style="font-family:var(--sans);font-size:24px;font-weight:600">Période suspecte : jusqu'à 18 mois</text></g>
-      <g class="pt"><circle cx="300" cy="140" r="14" fill="#fff" stroke="#0a0a0a" stroke-width="4"/><text class="tm2" x="300" y="95" text-anchor="middle">18 mois avant</text></g>
-      <g class="pt p2"><circle cx="1000" cy="140" r="14" fill="#0a0a0a"/><text class="tm2" x="1000" y="95" text-anchor="middle">Jugement d'ouverture</text></g>
-      <g class="pt p3"><text class="tf2" x="650" y="215" text-anchor="middle">Une cession faite dans cette période peut être attaquée</text></g>
+    <div class="carte" style="padding:1vh 1.6vw;min-height:0;overflow:hidden"><div class="tline" style="height:100%"><svg viewBox="0 0 1200 270" role="img" aria-label="Période suspecte : jusqu'à 18 mois avant le jugement d'ouverture">
+      <path d="M 40 120 H 1160" stroke="#0a0a0a" stroke-width="7" stroke-linecap="round"/>
+      <g class="zone"><rect x="280" y="88" width="720" height="64" rx="32" fill="#ff0000"/><text x="640" y="130" text-anchor="middle" fill="#fff" style="font-family:var(--sans);font-size:32px;font-weight:600">Période suspecte : jusqu'à 18 mois</text></g>
+      <g class="pt"><circle cx="280" cy="120" r="18" fill="#fff" stroke="#0a0a0a" stroke-width="6"/><text class="tf2" x="280" y="56" text-anchor="middle" style="font-size:30px">18 mois avant</text></g>
+      <g class="pt p2"><circle cx="1000" cy="120" r="18" fill="#0a0a0a"/><text class="tf2" x="1000" y="56" text-anchor="middle" style="font-size:30px">Jugement d'ouverture</text></g>
+      <g class="bille2"><use href="#c-pile" x="300" y="164" width="56" height="52"/></g>
+      <g class="pt p3"><text class="tf2" x="640" y="256" text-anchor="middle" style="font-size:30px">Une cession faite dans cette période peut être attaquée</text></g>
     </svg></div></div>
   </div>
   <p class="pied">Sources : CMF, art. L. 313-27 ; Cass. com., 07/12/2004, n° 02-20.732 ; C. com., art. L. 631-8, (consulté le 21/10/2026)</p>
@@ -673,10 +682,10 @@ Mais cette protection a deux limites. D'abord, la cession peut être attaquée s
 <section id="s10">
   <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
   <h2>Trois situations pour le client</h2>
-  <table class="tabl"><thead><tr><th>Situation du client</th><th>Il paie</th><th>Ses exceptions</th></tr></thead><tbody>
-    <tr><td>1 · Non informé<small>Pas de notification</small></td><td>Dupont, qui reverse à la banque</td><td><span class="pl v">Conservées</span></td></tr>
-    <tr><td>2 · Notifié<small>Par tout moyen, R. 313-15</small></td><td>La banque</td><td><span class="pl v">Conservées</span></td></tr>
-    <tr><td>3 · Il accepte<small>Acte écrit, L. 313-29</small></td><td>La banque</td><td><span class="pl r">Perdues</span></td></tr>
+  <table class="tabl big"><thead><tr><th>Situation du client</th><th>Il paie</th><th>Ses exceptions</th></tr></thead><tbody>
+    <tr><td><span class="lig"><svg class="ico"><use href="#c-personne"/></svg><span>1 · Non informé<small>Pas de notification</small></span></span></td><td><span class="lig"><svg class="ico"><use href="#c-immeuble"/></svg><span>Dupont<small>qui reverse à la banque</small></span></span></td><td><span class="pl v big">Conservées</span></td></tr>
+    <tr><td><span class="lig"><svg class="ico"><use href="#c-facture"/></svg><span>2 · Notifié<small>Par tout moyen, R. 313-15</small></span></span></td><td><span class="lig"><svg class="ico"><use href="#c-banque"/></svg><span>La banque</span></span></td><td><span class="pl v big">Conservées</span></td></tr>
+    <tr><td><span class="lig"><svg class="ico"><use href="#c-signature"/></svg><span>3 · Il accepte<small>Acte écrit, L. 313-29</small></span></span></td><td><span class="lig"><svg class="ico"><use href="#c-banque"/></svg><span>La banque</span></span></td><td><span class="pl r big">Perdues</span></td></tr>
   </tbody></table>
   <p class="pied">Sources : Légifrance, art. L. 313-28, L. 313-29, R. 313-15 ; Cass. com., 17/12/2013, n° 12-26.706, (consulté le 21/10/2026)</p>
   <div class="num">10 / 18</div>
@@ -713,14 +722,15 @@ Pour Martin, le message est clair : il faut bien réfléchir avant de signer.</d
   <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
   <h2>La garantie du cédant</h2>
   <div class="s12w">
-    <div class="tline"><svg viewBox="0 0 1100 440" role="img" aria-label="Le client ne paie pas : la banque se retourne contre le cédant">
-      <g class="noeud"><rect x="20" y="150" width="270" height="150" rx="20" fill="#fff" stroke="#008000" stroke-width="4"/><circle cx="85" cy="225" r="38" fill="#f5f5f5" stroke="#008000" stroke-width="2"/><use href="#c-personne" x="58" y="198" width="54" height="54"/><text class="tf2" x="215" y="215" text-anchor="middle">Martin</text><text class="tm2" x="215" y="246" text-anchor="middle">Ne paie pas</text></g>
-      <g class="noeud n2"><rect x="415" y="150" width="270" height="150" rx="20" fill="#0a0a0a"/><circle cx="480" cy="225" r="38" fill="#fff"/><use href="#c-banque" x="452" y="197" width="56" height="56"/><text class="tf2" x="610" y="225" text-anchor="middle" fill="#fff" style="fill:#fff">La banque</text></g>
-      <g class="noeud n3"><rect x="810" y="150" width="270" height="150" rx="20" fill="#1d9bf0"/><circle cx="875" cy="225" r="38" fill="#fff"/><use href="#c-immeuble" x="847" y="197" width="56" height="56"/><text class="tf2" x="1005" y="215" text-anchor="middle" style="fill:#fff">Dupont</text><text class="tm2" x="1005" y="246" text-anchor="middle" style="fill:rgba(255,255,255,.85)">Garant solidaire</text></g>
-      <path d="M 290 225 H 405" stroke="#ff0000" stroke-width="4" stroke-dasharray="10 9" fill="none"/><path d="M 322 200 l 36 50 M 358 200 l -36 50" stroke="#ff0000" stroke-width="7" stroke-linecap="round"/>
-      <path class="flux2" d="M 690 225 H 800" stroke="#0a0a0a" stroke-width="4" fill="none"/><polygon points="798,211 822,225 798,239" fill="#0a0a0a"/>
-      <text class="tf2" x="745" y="190" text-anchor="middle">Recours</text>
-      <text class="tm2" x="550" y="400" text-anchor="middle">Sauf clause de non-recours · demande amiable d'abord, sauf convention</text>
+    <div class="tline"><svg viewBox="-10 0 780 400" role="img" aria-label="Le client ne paie pas : la banque se retourne contre le cédant">
+      <g class="noeud"><rect x="0" y="100" width="220" height="140" rx="20" fill="#fff" stroke="#008000" stroke-width="4"/><circle cx="52" cy="170" r="34" fill="#f5f5f5" stroke="#008000" stroke-width="2"/><use href="#c-personne" x="27" y="145" width="50" height="50"/><text class="tf2" x="150" y="162" text-anchor="middle" style="font-size:23px">Martin</text><text class="tm2" x="150" y="192" text-anchor="middle" style="font-size:18px">Ne paie pas</text></g>
+      <g class="noeud n2"><rect x="270" y="100" width="220" height="140" rx="20" fill="#0a0a0a"/><circle cx="322" cy="170" r="34" fill="#fff"/><use href="#c-banque" x="297" y="145" width="50" height="50"/><text class="tf2" x="424" y="178" text-anchor="middle" style="fill:#fff;font-size:21px">La banque</text></g>
+      <g class="noeud n3"><rect x="540" y="100" width="220" height="140" rx="20" fill="#1d9bf0"/><circle cx="592" cy="170" r="34" fill="#fff"/><use href="#c-immeuble" x="567" y="145" width="50" height="50"/><text class="tf2" x="682" y="162" text-anchor="middle" style="fill:#fff;font-size:23px">Dupont</text><text class="tm2" x="682" y="192" text-anchor="middle" style="fill:rgba(255,255,255,.9);font-size:17px">Garant solidaire</text></g>
+      <path d="M 222 170 H 264" stroke="#ff0000" stroke-width="5" stroke-dasharray="9 8" fill="none"/><path d="M 231 150 l 24 40 M 255 150 l -24 40" stroke="#ff0000" stroke-width="7" stroke-linecap="round"/>
+      <path class="flux2" d="M 492 170 H 528" stroke="#0a0a0a" stroke-width="5" fill="none"/><polygon points="526,157 546,170 526,183" fill="#0a0a0a"/>
+      <text class="tf2" x="516" y="80" text-anchor="middle">Recours</text>
+      <text class="tm2" x="380" y="310" text-anchor="middle" style="font-size:24px">Sauf clause de non-recours</text>
+      <text class="tm2" x="380" y="346" text-anchor="middle" style="font-size:24px">Demande amiable d'abord, sauf convention</text>
     </svg></div>
     <div style="display:flex;flex-direction:column;gap:1.6vh">
       <div class="ck b" style="flex:1;justify-content:center"><div class="tete"><small>Hexgo Constructions, 2017</small><span class="pastille"><svg class="ico"><use href="#c-alerte"/></svg></span></div><div class="gros" style="font-size:clamp(2rem,3.6vw,3.2rem)">Condamnation cassée</div><p>La banque avait poursuivi la caution du cédant sans avoir d'abord demandé le paiement à la commune débitrice.</p></div>
@@ -784,9 +794,9 @@ La banque doit donc être très rigoureuse.</div>
   <div class="s15w">
     <div class="bloc" style="flex-direction:row;align-items:center;gap:2vw;padding:1.8vh 2vw"><div class="grand" style="font-size:clamp(1.6rem,3vw,2.6rem);letter-spacing:-.035em">Intérêts et commissions</div><div class="leg" style="max-width:34%">La banque se rémunère : cher pour une entreprise déjà fragile</div></div>
     <table class="tabl"><thead><tr><th></th><th>Cession Dailly</th><th>Affacturage</th></tr></thead><tbody>
-      <tr><td>Le client ne paie pas</td><td><span class="pl r">Le risque reste chez l'entreprise</span></td><td><span class="pl v">Peut être pris en charge</span></td></tr>
-      <tr><td>Poste clients</td><td>Géré par l'entreprise</td><td>Gestion complète</td></tr>
-      <tr><td>Garantie</td><td>Garant solidaire du paiement<small>Sauf convention contraire</small></td><td>Selon le contrat</td></tr>
+      <tr><td><span class="lig"><svg class="ico"><use href="#c-alerte"/></svg><span>Le client ne paie pas</span></span></td><td><span class="pl r">Le risque reste chez l'entreprise</span></td><td><span class="pl v">Peut être pris en charge</span></td></tr>
+      <tr><td><span class="lig"><svg class="ico"><use href="#c-facture"/></svg><span>Poste clients</span></span></td><td>Géré par l'entreprise</td><td>Gestion complète</td></tr>
+      <tr><td><span class="lig"><svg class="ico"><use href="#c-bouclier"/></svg><span>Garantie</span></span></td><td>Garant solidaire du paiement<small>Sauf convention contraire</small></td><td>Selon le contrat</td></tr>
     </tbody></table>
   </div>
   <p class="pied">Sources : Légifrance, art. L. 313-24 ; Dalloz ; Lamy droit du financement, (consulté le 21/10/2026)</p>
@@ -802,7 +812,7 @@ Contrairement à l'affacturage, le risque d'impayé reste donc chez elle.</div>
   <img class="lg-i" src="../assets/logo-iut.png" alt="IUT de Lille, Roubaix">
   <h2>Quatrième limite : le client et la banque</h2>
   <div class="s16w">
-    <div class="tline"><svg viewBox="0 0 900 470" role="img" aria-label="Balance : le client qui accepte, la banque"><rect x="436" y="120" width="28" height="300" rx="6" fill="#0a0a0a"/><rect x="330" y="415" width="240" height="22" rx="10" fill="#0a0a0a"/>
+    <div class="tline"><svg viewBox="-40 0 980 470" role="img" aria-label="Balance : le client qui accepte, la banque"><rect x="436" y="120" width="28" height="300" rx="6" fill="#0a0a0a"/><rect x="330" y="415" width="240" height="22" rx="10" fill="#0a0a0a"/>
       <g class="fleau"><rect x="90" y="100" width="720" height="22" rx="11" fill="#0a0a0a"/><circle cx="450" cy="111" r="18" fill="#1d9bf0"/>
         <path d="M 120 122 L 60 250 M 120 122 L 200 250" stroke="#0a0a0a" stroke-width="4" fill="none"/><path d="M 780 122 L 700 250 M 780 122 L 840 250" stroke="#0a0a0a" stroke-width="4" fill="none"/>
         <rect x="0" y="250" width="280" height="130" rx="18" fill="#1d9bf0"/><text x="140" y="300" text-anchor="middle" fill="#fff" style="font-family:var(--sans);font-size:22px;font-weight:600">Le client qui accepte</text><text x="140" y="338" text-anchor="middle" fill="#fff" style="font-family:var(--sans);font-size:19px">Exceptions perdues</text>
